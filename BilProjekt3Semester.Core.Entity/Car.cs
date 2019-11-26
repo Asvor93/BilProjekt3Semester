@@ -1,4 +1,6 @@
-﻿namespace BilProjekt3Semester.Core.Entity
+﻿using System;
+
+namespace BilProjekt3Semester.Core.Entity
 {
     public class Car
     {

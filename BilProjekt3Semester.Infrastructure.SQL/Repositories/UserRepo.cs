@@ -22,7 +22,7 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
             {
                 return _context.Users
                     .Select(u => new User { Id = u.Id, IsAdmin = u.IsAdmin, Username = u.Username })
-                    .ToList(); ;
+                    .ToList(); 
             }
             return _context.Users
                 .Select(u => new User { Id = u.Id, IsAdmin = u.IsAdmin, Username = u.Username })
