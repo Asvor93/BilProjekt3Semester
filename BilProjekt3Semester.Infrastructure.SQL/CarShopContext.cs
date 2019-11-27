@@ -17,6 +17,7 @@ namespace BilProjekt3Semester.Infrastructure.SQL
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Car> Cars { get; set; }
     }
 
     
