@@ -17,6 +17,8 @@
         public bool VarmeISæder { get; set; }
         public bool TågeLygter { get; set; }
         public bool SplitBagsæde { get; set; }
+        public Car Car { get; set; }
+        public Car CarId { get; set; }
 
     }
 }

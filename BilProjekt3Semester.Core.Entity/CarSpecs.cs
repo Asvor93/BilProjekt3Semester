@@ -18,7 +18,8 @@ namespace BilProjekt3Semester.Core.Entity
         public double Maxvægt { get; set; }
         public double MaxPåhængsVægt {get; set;}
         public int Vægt { get; set; }
-
+        public Car Car { get; set; }
+        public Car CarId { get; set; }
 
     }
 }
