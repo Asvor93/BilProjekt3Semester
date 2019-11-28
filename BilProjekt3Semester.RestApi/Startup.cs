@@ -19,6 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 
 namespace BilProjekt3Semester.RestApi
 {
@@ -77,6 +78,12 @@ namespace BilProjekt3Semester.RestApi
                 services.AddDbContext<CarShopContext>(opt =>
                     opt.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
             }
+
+            services.AddMvc().AddJsonOptions(opt =>
+            {
+                opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                opt.SerializerSettings.MaxDepth = 3;
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
