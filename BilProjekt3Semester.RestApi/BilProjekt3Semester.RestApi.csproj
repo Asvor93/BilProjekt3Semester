@@ -21,5 +21,6 @@
     <ProjectReference Include="..\BilProjekt3Semester.Core.Entity\BilProjekt3Semester.Core.Entity.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\BilProjekt3Semester.Infrastructure.SQL\BilProjekt3Semester.Infrastructure.SQL.csproj" />
   </ItemGroup>
 </Project>

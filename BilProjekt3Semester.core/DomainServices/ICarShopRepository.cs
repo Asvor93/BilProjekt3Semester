@@ -6,5 +6,6 @@ namespace BilProjekt3Semester.core.ApplicationServices
     public interface ICarShopRepository
     {
         IEnumerable<Car> ReadAllCars();
+        Car CreateCar(Car car);
     }
 }

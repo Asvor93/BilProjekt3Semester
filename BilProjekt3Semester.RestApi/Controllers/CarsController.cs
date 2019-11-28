@@ -33,5 +33,19 @@ namespace BilProjekt3Semester.RestApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        // POST api/cars
+        [HttpPost]
+        public ActionResult<Car> Post([FromBody] Car car)
+        {
+            try
+            {
+                return Ok(_carShopService.CreateCar(car));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

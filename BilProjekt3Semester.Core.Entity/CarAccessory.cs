@@ -1,7 +1,10 @@
-﻿namespace BilProjekt3Semester.Core.Entity
+﻿using System.Reflection.Metadata;
+
+namespace BilProjekt3Semester.Core.Entity
 {
-    public class CarAccessories
+    public class CarAccessory
     {
+        public int CarAccessoryId { get; set; }
         public int AntalAirbags { get; set; }
         public bool AirCondition { get; set; }
         public bool AbsBremser { get; set; }
@@ -18,7 +21,7 @@
         public bool TågeLygter { get; set; }
         public bool SplitBagsæde { get; set; }
         public Car Car { get; set; }
-        public Car CarId { get; set; }
+        public int CarId { get; set; }
 
     }
 }

@@ -22,5 +22,10 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
 
             return null;
         }
+
+        public Car CreateCar(Car car)
+        {
+            return _carShopRepository.CreateCar(car);
+        }
     }
 }

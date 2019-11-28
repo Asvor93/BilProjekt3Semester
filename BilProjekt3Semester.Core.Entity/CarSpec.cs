@@ -2,8 +2,9 @@
 
 namespace BilProjekt3Semester.Core.Entity
 {
-    public class CarSpecs
+    public class CarSpec
     {
+        public int CarSpecId { get; set; }
         public string Type { get; set; }
         public bool Servo { get; set; }
         public int  Gear { get; set; }

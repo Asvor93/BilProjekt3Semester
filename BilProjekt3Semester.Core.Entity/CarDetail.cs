@@ -1,7 +1,8 @@
 ﻿namespace BilProjekt3Semester.Core.Entity
 {
-    public class CarDetails
+    public class CarDetail
     {
+        public int CarDetailId { get; set; }
         public string Mærke { get; set; }
         public int Kilometer { get; set; }
         public int Årgang { get; set; }
