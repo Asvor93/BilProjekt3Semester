@@ -17,7 +17,7 @@
         public int HK { get; set; }
         public double Motorstørrelse { get; set; }
         public int Moment { get; set; }
-        public int CarInt { get; set; }
+        public int CarId { get; set; }
         public Car Car { get; set; }
     }
 }
