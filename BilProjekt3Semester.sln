@@ -5,17 +5,21 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7696C90A-01B1-44A9-BB3D-410C23D34319}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilProjekt3Semester.Core", "BilProjekt3Semester.core\BilProjekt3Semester.Core.csproj", "{65AB9B87-9FAD-4E4A-81EF-DD236C14D364}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BilProjekt3Semester.Core", "BilProjekt3Semester.core\BilProjekt3Semester.Core.csproj", "{65AB9B87-9FAD-4E4A-81EF-DD236C14D364}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilProjekt3Semester.Core.Entity", "BilProjekt3Semester.Core.Entity\BilProjekt3Semester.Core.Entity.csproj", "{A1DBDAF5-16CD-41FB-B9B1-EA9F94BB36C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BilProjekt3Semester.Core.Entity", "BilProjekt3Semester.Core.Entity\BilProjekt3Semester.Core.Entity.csproj", "{A1DBDAF5-16CD-41FB-B9B1-EA9F94BB36C9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{F5816EB6-1E76-4988-A4E7-F416338E30D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilProjekt3Semester.Infrastructure.SQL", "BilProjekt3Semester.Infrastructure.SQL\BilProjekt3Semester.Infrastructure.SQL.csproj", "{755BCDA9-7F11-452A-BE8C-B624891622DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BilProjekt3Semester.Infrastructure.SQL", "BilProjekt3Semester.Infrastructure.SQL\BilProjekt3Semester.Infrastructure.SQL.csproj", "{755BCDA9-7F11-452A-BE8C-B624891622DA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{F0D44B59-0FE3-44D9-9CC2-B415D1A78AE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilProjekt3Semester.RestApi", "BilProjekt3Semester.RestApi\BilProjekt3Semester.RestApi.csproj", "{5F05A2C2-B4F5-47A6-A978-040117C11EE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BilProjekt3Semester.RestApi", "BilProjekt3Semester.RestApi\BilProjekt3Semester.RestApi.csproj", "{5F05A2C2-B4F5-47A6-A978-040117C11EE2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{77F44FA7-1F9E-442A-91FF-31EEB7BA3FD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilProjekt3Semester.Test", "BilProjekt3Semester.Test\BilProjekt3Semester.Test.csproj", "{7D49637A-804D-48B1-99D1-9299237D33DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,10 @@ Global
 		{5F05A2C2-B4F5-47A6-A978-040117C11EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F05A2C2-B4F5-47A6-A978-040117C11EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F05A2C2-B4F5-47A6-A978-040117C11EE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D49637A-804D-48B1-99D1-9299237D33DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D49637A-804D-48B1-99D1-9299237D33DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D49637A-804D-48B1-99D1-9299237D33DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D49637A-804D-48B1-99D1-9299237D33DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +56,7 @@ Global
 		{A1DBDAF5-16CD-41FB-B9B1-EA9F94BB36C9} = {7696C90A-01B1-44A9-BB3D-410C23D34319}
 		{755BCDA9-7F11-452A-BE8C-B624891622DA} = {F5816EB6-1E76-4988-A4E7-F416338E30D8}
 		{5F05A2C2-B4F5-47A6-A978-040117C11EE2} = {F0D44B59-0FE3-44D9-9CC2-B415D1A78AE9}
+		{7D49637A-804D-48B1-99D1-9299237D33DE} = {77F44FA7-1F9E-442A-91FF-31EEB7BA3FD3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4BD5E6E0-0F95-4FAF-948A-12B57D867832}

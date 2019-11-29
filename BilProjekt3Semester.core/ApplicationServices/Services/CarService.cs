@@ -24,9 +24,24 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
             return null;
         }
 
-        public Car CreateCar(Car car)
+        public Car CreateCar(Car carToCreate)
         {
-            return _carShopRepository.CreateCar(car);
+            if (carToCreate.CarDetails == null)
+            {
+                throw new InvalidDataException("CarDetails can't be null when trying to create a car");
+            }
+
+            if (carToCreate.CarAccessories == null)
+            {
+                throw new InvalidDataException("CarAccessories can't be null when trying to create a car");
+            }
+
+            if (carToCreate.CarSpecs == null)
+            {
+                throw new InvalidDataException("CarSpecs can't be null when trying to create a car");
+            }
+
+            return _carShopRepository.CreateCar(carToCreate);
         }
 
         public Car DeleteCar(Car carToDelete)
