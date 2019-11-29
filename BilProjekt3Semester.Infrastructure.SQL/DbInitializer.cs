@@ -106,6 +106,7 @@ namespace BilProjekt3Semester.Infrastructure.SQL
             context.CarDetails.AddRange(cd1,cd2,cd3);
             context.CarAccessories.AddRange(ca1,ca2,ca3);
             context.CarSpecs.AddRange(cs1,cs2,cs3);
+            context.SaveChanges();
         }
     }
 }

@@ -27,7 +27,7 @@ namespace BilProjekt3Semester.RestApi.Controllers
         [HttpPost]
         public IActionResult Login([FromBody]LoginInputModel model)
         {
-            var user = repository.LogIn().FirstOrDefault(u => u.Username == model.Username);
+            var user = repository.GetAll().FirstOrDefault(u => u.Username == model.Username);
 
             // check if username exists
             if (user == null)

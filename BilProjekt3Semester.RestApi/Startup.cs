@@ -103,8 +103,7 @@ namespace BilProjekt3Semester.RestApi
                     // remove comment when seedDb has been implemented.
                     // It is done here instead of in the initializer so that it does not interfere with the production environment
                        context.Database.EnsureDeleted();
-                       context.Database.EnsureCreated(); // move to dbInitializer when this is implemented
-                    // dbInitializer.SeedDb(context); not implemented yet
+                       dbInitializer.SeedDb(context);
                 }
                 app.UseDeveloperExceptionPage();
             }
@@ -115,7 +114,7 @@ namespace BilProjekt3Semester.RestApi
                     var context = scope.ServiceProvider.GetRequiredService<CarShopContext>();
                     var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
                     //dbInitializer.SeedDb(context);  //only run once
-                    context.Database.EnsureCreated();
+                    //context.Database.EnsureCreated();
                 }
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
