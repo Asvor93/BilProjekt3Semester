@@ -1,78 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BilProjekt3Semester.Core.DomainServices;
 using BilProjekt3Semester.Core.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
 {
-    public class UserRepo
+    public class UserRepo : IUserRepo
     {
 
-        private CarShopContext _context;
+        private readonly CarShopContext db;
 
         public UserRepo(CarShopContext context)
         {
-            _context = context;
+            db = context;
         }
 
-        public List<User> GetAllUsers(Filter filter)
+        public IEnumerable<User> GetAll()
         {
-            if (filter == null)
-            {
-                return _context.Users
-                    .Select(u => new User { Id = u.Id, IsAdmin = u.IsAdmin, Username = u.Username })
-                    .ToList(); 
-            }
-            return _context.Users
-                .Select(u => new User { Id = u.Id, IsAdmin = u.IsAdmin, Username = u.Username })
-                .Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
-                .Take(filter.ItemsPrPage)
-                .ToList();
+            return db.Users.ToList();
         }
 
-        public User GetUser(int id)
+        public User Get(int id)
         {
-            return _context.Users
-                .Select(u => new User { Id = u.Id, IsAdmin = u.IsAdmin, Username = u.Username })
-                .FirstOrDefault(u => u.Id == id);
+            return db.Users.FirstOrDefault(b => b.Id == id);
         }
 
-        public User CreateUser(User user)
+        public void Add(User entity)
         {
-            _context.Attach(user).State = EntityState.Added;
-            _context.SaveChanges();
-            user.PasswordSalt = null;
-            user.PasswordHash = null;
-            return user;
+            db.Users.Add(entity);
+            db.SaveChanges();
         }
 
-        public User UpdateUser(User user)
+        public void Edit(User entity)
         {
-            _context.Attach(user).State = EntityState.Modified;
-            _context.SaveChanges();
-            user.PasswordSalt = null;
-            user.PasswordHash = null;
-            return user;
+            db.Entry(entity).State = EntityState.Modified;
+            db.SaveChanges();
         }
 
-        public User DeleteUser(int id)
+        public void Remove(int id)
         {
-            var user = _context.Remove(new User { Id = id }).Entity;
-            _context.SaveChanges();
-            user.PasswordSalt = null;
-            user.PasswordHash = null;
-            return user;
-        }
-
-        public List<User> LogIn()
-        {
-            return _context.Users.ToList();
-        }
-
-        public int Count()
-        {
-            return _context.Users.Count();
+            var item = db.Users.FirstOrDefault(b => b.Id == id);
+            db.Users.Remove(item);
+            db.SaveChanges();
         }
     }
 }
