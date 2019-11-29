@@ -47,5 +47,19 @@ namespace BilProjekt3Semester.RestApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        //DELETE api/cars
+        [HttpDelete("{id}")]
+        public ActionResult<Car> Delte(int id)
+        {
+            try
+            {
+                return Ok(_carShopService.DeleteCar(id > 0 ? new Car() {CarId = id} : null));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
