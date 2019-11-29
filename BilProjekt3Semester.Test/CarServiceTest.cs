@@ -11,7 +11,7 @@ using Xunit;
 
 namespace BilProjekt3Semester.Test
 {
-    public class UnitTest1
+    public class CarServiceTest
     {
         [Fact]
         public void TestCreateCarOnlyCallsRepositoryOnce()
