@@ -29,5 +29,12 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
             _carShopContext.SaveChanges();
             return car;
         }
+
+        public Car DeleteCar(int id)
+        {
+            var carToDelete = _carShopContext.Remove(new Car {CarId = id}).Entity;
+            _carShopContext.SaveChanges();
+            return carToDelete;
+        }
     }
 }
