@@ -6,3 +6,9 @@ solution: BilProjekt3Semester.sln
 script:
  - dotnet restore
  - dotnet build
+
+# safelist
+branches:
+ only:
+ - master
+ - Dev
