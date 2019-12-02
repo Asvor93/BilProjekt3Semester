@@ -46,11 +46,11 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
 
         public Car DeleteCar(Car carToDelete)
         {
-            if (carToDelete != null)
+            if (carToDelete == null)
             {
-                return _carShopRepository.DeleteCar(carToDelete.CarId);
+                throw new InvalidDataException("The car you are trying to delete does not exist");
             }
-            throw new InvalidDataException("The car you are trying to delete does not exist");
+            return _carShopRepository.DeleteCar(carToDelete.CarId);
         }
     }
 }
