@@ -13,5 +13,6 @@ namespace BilProjekt3Semester.Core.Entity
         public CarAccessory CarAccessories { get; set; }
         public CarDetail CarDetails { get; set; }
         public CarSpec CarSpecs { get; set; }
+        public string Description { get; set; }
     }
 }
