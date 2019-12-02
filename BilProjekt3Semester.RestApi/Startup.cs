@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BilProjekt3Semester.core.ApplicationServices;
 using BilProjekt3Semester.Core.ApplicationServices;
 using BilProjekt3Semester.Core.ApplicationServices.Services;
+using BilProjekt3Semester.Core.DomainServices;
 using BilProjekt3Semester.Infrastructure.SQL;
 using BilProjekt3Semester.Infrastructure.SQL.Helper;
 using BilProjekt3Semester.Infrastructure.SQL.Repositories;
@@ -43,8 +44,8 @@ namespace BilProjekt3Semester.RestApi
             rand.NextBytes(secretBytes);
 
             services.AddSingleton<IAuthHelper>(new AuthHelper(secretBytes));
-            services.AddScoped<ICarShopRepository, CarRepository>();
-            services.AddScoped<ICarShopService, CarService>();
+            services.AddScoped<ICarRepository, CarRepository>();
+            services.AddScoped<ICarService, CarService>();
             services.AddTransient<IDbInitializer, DbInitializer>();
 
             services.AddCors(options => options.AddPolicy("AllowSpecificOrigin",

@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using BilProjekt3Semester.core.ApplicationServices;
+using BilProjekt3Semester.Core.DomainServices;
 using BilProjekt3Semester.Core.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
 {
-    public class CarRepository: ICarShopRepository
+    public class CarRepository: ICarRepository
     {
         private readonly CarShopContext _carShopContext;
 

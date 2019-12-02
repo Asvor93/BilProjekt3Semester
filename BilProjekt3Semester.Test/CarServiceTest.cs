@@ -4,6 +4,7 @@ using System.IO;
 using BilProjekt3Semester.core.ApplicationServices;
 using BilProjekt3Semester.Core.ApplicationServices;
 using BilProjekt3Semester.Core.ApplicationServices.Services;
+using BilProjekt3Semester.Core.DomainServices;
 using BilProjekt3Semester.Core.Entity;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Moq;
@@ -24,9 +25,9 @@ namespace BilProjekt3Semester.Test
                 CarDetails = new CarDetail()
             };
 
-            var mockCarRepo = new Mock<ICarShopRepository>();
+            var mockCarRepo = new Mock<ICarRepository>();
             mockCarRepo.Setup(r => r.CreateCar(It.IsAny<Car>())).Returns(mockCar);
-            ICarShopService service = new CarService(mockCarRepo.Object);
+            ICarService service = new CarService(mockCarRepo.Object);
             
             //Calling method
             service.CreateCar(mockCar);
@@ -45,8 +46,8 @@ namespace BilProjekt3Semester.Test
                 CarSpecs = new CarSpec()
             };
 
-            var mockCarRepo = new Mock<ICarShopRepository>();
-            ICarShopService service = new CarService(mockCarRepo.Object);
+            var mockCarRepo = new Mock<ICarRepository>();
+            ICarService service = new CarService(mockCarRepo.Object);
 
             //Calling method and assert
             Exception ex = Assert.Throws<InvalidDataException>(() => service.CreateCar(mockCar));
@@ -63,8 +64,8 @@ namespace BilProjekt3Semester.Test
                 CarDetails = new CarDetail()
             };
 
-            var mockCarRepo = new Mock<ICarShopRepository>();
-            ICarShopService service = new CarService(mockCarRepo.Object);
+            var mockCarRepo = new Mock<ICarRepository>();
+            ICarService service = new CarService(mockCarRepo.Object);
 
             //Calling method and assert
             Exception ex = Assert.Throws<InvalidDataException>(() => service.CreateCar(mockCar));
@@ -81,8 +82,8 @@ namespace BilProjekt3Semester.Test
                 CarDetails = new CarDetail()
             };
 
-            var mockCarRepo = new Mock<ICarShopRepository>();
-            ICarShopService service = new CarService(mockCarRepo.Object);
+            var mockCarRepo = new Mock<ICarRepository>();
+            ICarService service = new CarService(mockCarRepo.Object);
 
             //Calling method and assert
             Exception ex = Assert.Throws<InvalidDataException>(() => service.CreateCar(mockCar));
@@ -99,9 +100,9 @@ namespace BilProjekt3Semester.Test
                 CarDetails = new CarDetail()
             };
 
-            var mockCarRepo = new Mock<ICarShopRepository>();
+            var mockCarRepo = new Mock<ICarRepository>();
             mockCarRepo.Setup(r => r.DeleteCar(mockCar.CarId));
-            ICarShopService service = new CarService(mockCarRepo.Object);
+            ICarService service = new CarService(mockCarRepo.Object);
 
             //Calling method
             service.DeleteCar(mockCar);
