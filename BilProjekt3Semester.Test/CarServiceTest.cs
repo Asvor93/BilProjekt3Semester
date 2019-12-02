@@ -89,5 +89,25 @@ namespace BilProjekt3Semester.Test
             Assert.Equal("CarSpecs can't be null when trying to create a car", ex.Message);
         }
 
+        [Fact]
+        public void TesDeleteCarOnlyCallsRepositoryOnce()
+        {
+            //setup
+            var mockCar = new Car
+            {
+                CarSpecs = new CarSpec(),
+                CarDetails = new CarDetail()
+            };
+
+            var mockCarRepo = new Mock<ICarShopRepository>();
+            mockCarRepo.Setup(r => r.DeleteCar(mockCar.CarId));
+            ICarShopService service = new CarService(mockCarRepo.Object);
+
+            //Calling method
+            service.DeleteCar(mockCar);
+
+            //Assert
+            mockCarRepo.Verify(s => s.DeleteCar(mockCar.CarId), Times.Once);
+        }
     }
 }
