@@ -51,6 +51,7 @@ namespace BilProjekt3Semester.RestApi
 
             services.AddCors(options => options.AddPolicy("AllowSpecificOrigin",
                 builder => builder
+                    .WithOrigins("http://localhost:4200")
                     .AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
             // Add JWT based authentication
