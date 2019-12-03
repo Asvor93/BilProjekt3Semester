@@ -44,8 +44,6 @@ namespace BilProjekt3Semester.RestApi
             rand.NextBytes(secretBytes);
 
             services.AddSingleton<IAuthHelper>(new AuthHelper(secretBytes));
-            services.AddScoped<ICarShopRepository, CarRepository>();
-            services.AddScoped<ICarShopService, CarService>();
             services.AddScoped<IUserRepo, UserRepo>();
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<ICarService, CarService>();
