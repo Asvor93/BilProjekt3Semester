@@ -2,15 +2,16 @@
 using System.IO;
 using System.Linq;
 using BilProjekt3Semester.core.ApplicationServices;
+using BilProjekt3Semester.Core.DomainServices;
 using BilProjekt3Semester.Core.Entity;
 
 namespace BilProjekt3Semester.Core.ApplicationServices.Services
 {
-    public class CarService: ICarShopService
+    public class CarService: ICarService
     {
-        private readonly ICarShopRepository _carShopRepository;
+        private readonly ICarRepository _carShopRepository;
 
-        public CarService(ICarShopRepository carShopRepository)
+        public CarService(ICarRepository carShopRepository)
         {
             _carShopRepository = carShopRepository;
         }
@@ -46,11 +47,11 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
 
         public Car DeleteCar(Car carToDelete)
         {
-            if (carToDelete != null)
+            if (carToDelete == null)
             {
-                return _carShopRepository.DeleteCar(carToDelete.CarId);
+                throw new InvalidDataException("The car you are trying to delete does not exist");
             }
-            throw new InvalidDataException("The car you are trying to delete does not exist");
+            return _carShopRepository.DeleteCar(carToDelete.CarId);
         }
     }
 }

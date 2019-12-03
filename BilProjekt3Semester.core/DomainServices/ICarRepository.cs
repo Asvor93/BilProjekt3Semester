@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using BilProjekt3Semester.Core.Entity;
 
-namespace BilProjekt3Semester.core.ApplicationServices
+namespace BilProjekt3Semester.Core.DomainServices
 {
-    public interface ICarShopRepository
+    public interface ICarRepository
     {
         IEnumerable<Car> ReadAllCars();
         Car CreateCar(Car car);

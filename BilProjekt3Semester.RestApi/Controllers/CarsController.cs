@@ -13,11 +13,11 @@ namespace BilProjekt3Semester.RestApi.Controllers
     [ApiController]
     public class CarsController : ControllerBase
     {
-        private ICarShopService _carShopService;
+        private ICarService _carService;
 
-        public CarsController(ICarShopService carShopService)
+        public CarsController(ICarService carService)
         {
-            _carShopService = carShopService;
+            _carService = carService;
         }
 
         // GET api/cars
@@ -26,7 +26,7 @@ namespace BilProjekt3Semester.RestApi.Controllers
         {
             try
             {
-                return Ok(_carShopService.GetCars());
+                return Ok(_carService.GetCars());
             }
             catch (Exception e)
             {
@@ -40,7 +40,7 @@ namespace BilProjekt3Semester.RestApi.Controllers
         {
             try
             {
-                return Ok(_carShopService.CreateCar(car));
+                return Ok(_carService.CreateCar(car));
             }
             catch (Exception e)
             {
@@ -54,7 +54,7 @@ namespace BilProjekt3Semester.RestApi.Controllers
         {
             try
             {
-                return Ok(_carShopService.DeleteCar(id > 0 ? new Car() {CarId = id} : null));
+                return Ok(_carService.DeleteCar(id > 0 ? new Car() {CarId = id} : null));
             }
             catch (Exception e)
             {

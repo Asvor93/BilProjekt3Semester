@@ -47,6 +47,8 @@ namespace BilProjekt3Semester.RestApi
             services.AddScoped<ICarShopRepository, CarRepository>();
             services.AddScoped<ICarShopService, CarService>();
             services.AddScoped<IUserRepo, UserRepo>();
+            services.AddScoped<ICarRepository, CarRepository>();
+            services.AddScoped<ICarService, CarService>();
             services.AddTransient<IDbInitializer, DbInitializer>();
 
             services.AddCors(options => options.AddPolicy("AllowSpecificOrigin",
