@@ -34,7 +34,7 @@ namespace BilProjekt3Semester.RestApi.Controllers
                 return Unauthorized();
 
             // check if password is correct
-            if (!VerifyPasswordHash(model.Password, user.PasswordHash, user.PasswordSalt))
+            if (!authenticationHelper.VerifyPasswordHash(model.Password, user.PasswordHash, user.PasswordSalt))
                 return Unauthorized();
 
             // Authentication successful
@@ -43,22 +43,6 @@ namespace BilProjekt3Semester.RestApi.Controllers
                 username = user.Username,
                 token = authenticationHelper.GenerateToken(user)
             });
-        }
-        private bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
-        {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt))
-            {
-                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                for (int i = 0; i < computedHash.Length; i++)
-                {
-                    if (computedHash[i] != storedHash[i])
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
         }
 
     }

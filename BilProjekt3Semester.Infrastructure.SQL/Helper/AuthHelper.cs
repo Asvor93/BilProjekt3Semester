@@ -59,7 +59,7 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Helper
                     null, // audience - not needed (ValidateAudience = false)
                     claims.ToArray(),
                     DateTime.Now,               // notBefore
-                    DateTime.Now.AddMinutes(1)));  // expires
+                    DateTime.Now.AddMinutes(5)));  // expires
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

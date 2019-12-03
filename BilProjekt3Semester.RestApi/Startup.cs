@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BilProjekt3Semester.core.ApplicationServices;
 using BilProjekt3Semester.Core.ApplicationServices;
 using BilProjekt3Semester.Core.ApplicationServices.Services;
+using BilProjekt3Semester.Core.DomainServices;
 using BilProjekt3Semester.Infrastructure.SQL;
 using BilProjekt3Semester.Infrastructure.SQL.Helper;
 using BilProjekt3Semester.Infrastructure.SQL.Repositories;
@@ -45,11 +46,11 @@ namespace BilProjekt3Semester.RestApi
             services.AddSingleton<IAuthHelper>(new AuthHelper(secretBytes));
             services.AddScoped<ICarShopRepository, CarRepository>();
             services.AddScoped<ICarShopService, CarService>();
+            services.AddScoped<IUserRepo, UserRepo>();
             services.AddTransient<IDbInitializer, DbInitializer>();
 
             services.AddCors(options => options.AddPolicy("AllowSpecificOrigin",
                 builder => builder
-                    .WithOrigins("http://localhost:4200")
                     .AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
             // Add JWT based authentication
@@ -58,13 +59,13 @@ namespace BilProjekt3Semester.RestApi
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateAudience = false,
-                    //ValidAudience = "TodoApiClient",
+                    //ValidAudience = "",
                     ValidateIssuer = false,
-                    //ValidIssuer = "TodoApi",
+                    //ValidIssuer = "",
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(secretBytes),
                     ValidateLifetime = true, //validate the expiration and not before values in the token
-                    ClockSkew = TimeSpan.FromMinutes(5) //5 minute tolerance for the expiration date
+                    ClockSkew = TimeSpan.FromMinutes(1) //5 minute tolerance for the expiration date
                 };
             });
           
@@ -100,7 +101,7 @@ namespace BilProjekt3Semester.RestApi
                 {
                     var context = scope.ServiceProvider.GetRequiredService<CarShopContext>();
                     var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
-                    // remove comment when seedDb has been implemented.
+                   
                     // It is done here instead of in the initializer so that it does not interfere with the production environment
                        context.Database.EnsureDeleted();
                        dbInitializer.SeedDb(context);
