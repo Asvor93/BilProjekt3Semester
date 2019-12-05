@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BilProjekt3Semester.Core.ApplicationServices;
 using BilProjekt3Semester.Core.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,6 +36,7 @@ namespace BilProjekt3Semester.RestApi.Controllers
         }
 
         // POST api/cars
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult<Car> Post([FromBody] Car car)
         {
@@ -49,6 +51,7 @@ namespace BilProjekt3Semester.RestApi.Controllers
         }
 
         //DELETE api/cars
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public ActionResult<Car> Delte(int id)
         {
