@@ -8,5 +8,6 @@ namespace BilProjekt3Semester.Core.DomainServices
         IEnumerable<Car> ReadAllCars();
         Car CreateCar(Car car);
         Car DeleteCar(int id);
+        Car UpdateCar(Car carToUpdate);
     }
 }

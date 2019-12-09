@@ -53,5 +53,15 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
             }
             return _carShopRepository.DeleteCar(carToDelete.CarId);
         }
+
+        public Car UpdateCar(Car car)
+        {
+            if (car == null)
+            {
+                throw new InvalidDataException("The car does not exist!");
+            }
+
+            return _carShopRepository.UpdateCar(car);
+        }
     }
 }
