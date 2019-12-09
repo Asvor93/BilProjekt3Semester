@@ -110,5 +110,27 @@ namespace BilProjekt3Semester.Test
             //Assert
             mockCarRepo.Verify(s => s.DeleteCar(mockCar.CarId), Times.Once);
         }
+
+        [Fact]
+        public void TestUpdateCarOnlyCallsRepositoryOnce()
+        {
+            //setup
+            var mockCar = new Car
+            {
+                CarAccessories = new CarAccessory { AbsBremser = false },
+                CarSpecs = new CarSpec(),
+                CarDetails = new CarDetail()
+            };
+
+            var mockCarRepo = new Mock<ICarShopRepository>();
+            mockCarRepo.Setup(r => r.CreateCar(It.IsAny<Car>())).Returns(mockCar);
+            ICarShopService service = new CarService(mockCarRepo.Object);
+
+            //Calling method
+            service.UpdateCar(mockCar);
+
+            //Assert
+            mockCarRepo.Verify(s => s.UpdateCar(It.IsAny<Car>()), Times.Once);
+        }
     }
 }

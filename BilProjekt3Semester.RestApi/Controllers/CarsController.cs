@@ -59,11 +59,30 @@ namespace BilProjekt3Semester.RestApi.Controllers
         //DELETE api/cars
         [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
-        public ActionResult<Car> Delte(int id)
+        public ActionResult<Car> Delete(int id)
         {
             try
             {
                 return Ok(_carService.DeleteCar(id > 0 ? new Car() {CarId = id} : null));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        //PUT api/cars
+        [HttpPut("{id}")]
+        public ActionResult<Car> Put(int id, [FromBody] Car carToUpdate)
+        {
+            try
+            {
+                if (id < 1 || id != carToUpdate.CarId)
+                {
+                    return BadRequest("The id does not match anything");
+                }
+
+                return Ok(_carService.UpdateCar(carToUpdate));
             }
             catch (Exception e)
             {
