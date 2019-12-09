@@ -44,7 +44,7 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
             _carShopContext.Entry(carToUpdate).Reference(c => c.CarDetails).IsModified = true;
             _carShopContext.Entry(carToUpdate).Reference(c => c.CarAccessories).IsModified = true;
             _carShopContext.Entry(carToUpdate).Reference(c => c.CarSpecs).IsModified = true;
-            _carShopContext.Entry(carToUpdate).Reference(c => c.PictureLinks).IsModified = true;
+            _carShopContext.Entry(carToUpdate).Collection(c => c.PictureLinks).IsModified = true;
             _carShopContext.SaveChanges();
             return carToUpdate;
         }
