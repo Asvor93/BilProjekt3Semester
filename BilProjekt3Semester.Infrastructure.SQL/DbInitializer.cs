@@ -80,6 +80,7 @@ namespace BilProjekt3Semester.Infrastructure.SQL
             //Cars
             var c1 = new Car
             {
+                Price = 10,
                 CarAccessories = ca1,
                 CarDetails = cd1,
                 CarSpecs = cs1,
@@ -94,6 +95,7 @@ namespace BilProjekt3Semester.Infrastructure.SQL
 
             var c2 = new Car
             {
+                Price = 25,
                 CarAccessories = ca2,
                 CarDetails = cd2,
                 CarSpecs = cs2,
@@ -113,6 +115,7 @@ namespace BilProjekt3Semester.Infrastructure.SQL
             
             var c3 = new Car
             {
+                Price = 15,
                 CarAccessories = ca3,
                 CarDetails = cd3,
                 CarSpecs = cs3,
