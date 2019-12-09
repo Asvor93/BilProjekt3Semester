@@ -27,7 +27,7 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
 
         public Car ReadById(int id)
         {
-
+            return _carRepository.ReadById(id);
         }
 
         public Car CreateCar(Car carToCreate)

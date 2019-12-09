@@ -9,5 +9,6 @@ namespace BilProjekt3Semester.Core.DomainServices
         Car CreateCar(Car car);
         Car DeleteCar(int id);
         Car UpdateCar(Car carToUpdate);
+        Car ReadById(int id);
     }
 }
