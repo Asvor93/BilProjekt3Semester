@@ -31,6 +31,12 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
             return car;
         }
 
+        public Car ReadById(int id)
+        {
+            return _carShopContext.Cars
+                .FirstOrDefault(c => c.CarId == id);
+        }
+
         public Car DeleteCar(int id)
         {
             var carToDelete = _carShopContext.Remove(new Car {CarId = id}).Entity;

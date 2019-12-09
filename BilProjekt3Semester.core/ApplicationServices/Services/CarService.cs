@@ -25,6 +25,11 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
             return null;
         }
 
+        public Car ReadById(int id)
+        {
+
+        }
+
         public Car CreateCar(Car carToCreate)
         {
             if (carToCreate.CarDetails == null)

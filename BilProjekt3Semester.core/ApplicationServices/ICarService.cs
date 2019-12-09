@@ -8,5 +8,6 @@ namespace BilProjekt3Semester.Core.ApplicationServices
         List<Car> GetCars();
         Car CreateCar(Car car);
         Car DeleteCar(Car carToDelete);
+        Car ReadById(int id);
     }
 }

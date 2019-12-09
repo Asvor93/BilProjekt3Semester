@@ -35,6 +35,12 @@ namespace BilProjekt3Semester.RestApi.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<Car> GetById(int id)
+        {
+            return _carService.ReadById(id);
+        }
+
         // POST api/cars
         [Authorize(Roles = "Administrator")]
         [HttpPost]
