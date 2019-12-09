@@ -76,7 +76,7 @@ namespace BilProjekt3Semester.RestApi.Controllers
                     return BadRequest("The id does not match anything");
                 }
 
-                return _carShopService.UpdateCar(carToUpdate);
+                return Ok(_carService.UpdateCar(carToUpdate));
             }
             catch (Exception e)
             {

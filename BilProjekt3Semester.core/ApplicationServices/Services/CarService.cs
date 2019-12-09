@@ -9,17 +9,17 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
 {
     public class CarService: ICarService
     {
-        private readonly ICarRepository _carShopRepository;
+        private readonly ICarRepository _carRepository;
 
-        public CarService(ICarRepository carShopRepository)
+        public CarService(ICarRepository carRepository)
         {
-            _carShopRepository = carShopRepository;
+            _carRepository = carRepository;
         }
         public List<Car> GetCars()
         {
-            if (_carShopRepository.ReadAllCars() != null)
+            if (_carRepository.ReadAllCars() != null)
             {
-                return _carShopRepository.ReadAllCars().ToList();
+                return _carRepository.ReadAllCars().ToList();
             }
 
             return null;
@@ -42,7 +42,7 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
                 throw new InvalidDataException("CarSpecs can't be null when trying to create a car");
             }
 
-            return _carShopRepository.CreateCar(carToCreate);
+            return _carRepository.CreateCar(carToCreate);
         }
 
         public Car DeleteCar(Car carToDelete)
@@ -51,7 +51,7 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
             {
                 throw new InvalidDataException("The car you are trying to delete does not exist");
             }
-            return _carShopRepository.DeleteCar(carToDelete.CarId);
+            return _carRepository.DeleteCar(carToDelete.CarId);
         }
 
         public Car UpdateCar(Car car)
@@ -61,7 +61,7 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
                 throw new InvalidDataException("The car does not exist!");
             }
 
-            return _carShopRepository.UpdateCar(car);
+            return _carRepository.UpdateCar(car);
         }
     }
 }
