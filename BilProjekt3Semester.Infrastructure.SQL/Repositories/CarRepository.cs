@@ -21,7 +21,8 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
                 .Include(c => c.CarAccessories)
                 .Include(c => c.CarDetails)
                 .Include(c => c.CarSpecs)
-                .Include(c => c.PictureLinks);
+                .Include(c => c.PictureLinks)
+                .ToList();
         }
 
         public Car CreateCar(Car car)

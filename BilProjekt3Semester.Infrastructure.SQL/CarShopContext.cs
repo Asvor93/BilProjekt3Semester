@@ -14,15 +14,15 @@ namespace BilProjekt3Semester.Infrastructure.SQL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CarPictureLink>()
-                .HasOne(pl => pl.Car)
-                .WithMany(c => c.PictureLinks)
+            modelBuilder.Entity<Car>()
+                .HasMany(c => c.PictureLinks)
+                .WithOne(pl => pl.Car)
                 .HasForeignKey(pl => pl.CarId);
 
             modelBuilder.Entity<Car>()
                 .HasOne(c => c.CarAccessories)
                 .WithOne(ca => ca.Car)
-                .HasForeignKey<CarAccessory>(ca => ca.CarId);
+                .HasForeignKey<CarAccessory>(ca => ca.CarId); 
 
             modelBuilder.Entity<Car>()
                 .HasOne(c => c.CarSpecs)

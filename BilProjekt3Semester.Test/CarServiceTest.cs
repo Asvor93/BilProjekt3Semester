@@ -122,9 +122,9 @@ namespace BilProjekt3Semester.Test
                 CarDetails = new CarDetail()
             };
 
-            var mockCarRepo = new Mock<ICarShopRepository>();
+            var mockCarRepo = new Mock<ICarRepository>();
             mockCarRepo.Setup(r => r.CreateCar(It.IsAny<Car>())).Returns(mockCar);
-            ICarShopService service = new CarService(mockCarRepo.Object);
+            ICarService service = new CarService(mockCarRepo.Object);
 
             //Calling method
             service.UpdateCar(mockCar);
