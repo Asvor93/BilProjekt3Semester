@@ -72,6 +72,7 @@ namespace BilProjekt3Semester.RestApi.Controllers
         }
 
         //PUT api/cars
+        [Authorize(Roles = "Administrator")]
         [HttpPut("{id}")]
         public ActionResult<Car> Put(int id, [FromBody] Car carToUpdate)
         {
