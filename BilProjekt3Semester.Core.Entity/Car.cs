@@ -8,7 +8,7 @@ namespace BilProjekt3Semester.Core.Entity
         public int CarId { get; set; }
         public double Price { get; set; }
         public bool Sold { get; set; }
-        public DateTime SoldDate { get; set; }
+        public DateTime? SoldDate { get; set; }
         public string ThumbnailLink { get; set; }
         public List<CarPictureLink> PictureLinks { get; set; }
         public CarAccessory CarAccessories { get; set; }
