@@ -20,7 +20,7 @@ namespace BilProjekt3Semester.Test
             //setup
             var mockCar = new Car
             {
-                CarAccessories = new CarAccessory { AbsBremser = false },
+                CarAccessories = new CarAccessory { AbsBrakes = false },
                 CarSpecs = new CarSpec(),
                 CarDetails = new CarDetail()
             };
@@ -117,7 +117,7 @@ namespace BilProjekt3Semester.Test
             //setup
             var mockCar = new Car
             {
-                CarAccessories = new CarAccessory { AbsBremser = false },
+                CarAccessories = new CarAccessory { AbsBrakes = false },
                 CarSpecs = new CarSpec(),
                 CarDetails = new CarDetail()
             };

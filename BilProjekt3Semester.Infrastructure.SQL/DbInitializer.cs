@@ -32,33 +32,33 @@ namespace BilProjekt3Semester.Infrastructure.SQL
             //Car accessories
             var ca1 = new CarAccessory
             {
-                AbsBremser = true
+                AbsBrakes = true
             };
 
             var ca2 = new CarAccessory
             {
-                AbsBremser = false
+                AbsBrakes = false
             };
 
             var ca3 = new CarAccessory
             {
-                AbsBremser = true
+                AbsBrakes = true
             };
 
             //Car details
             var cd1 = new CarDetail
             {
-                Døre = 5
+                Doors = 5
             };
 
             var cd2 = new CarDetail
             {
-                Døre = 3
+                Doors = 3
             };
 
             var cd3 = new CarDetail
             {
-                Døre = 5
+                Doors = 5
             };
 
             //Car specs
