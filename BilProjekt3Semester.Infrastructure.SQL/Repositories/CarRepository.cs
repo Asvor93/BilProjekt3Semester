@@ -35,6 +35,10 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
         public Car ReadById(int id)
         {
             return _carShopContext.Cars
+                .Include(c => c.CarAccessories)
+                .Include(c => c.CarDetails)
+                .Include(c => c.CarSpecs)
+                .Include(c => c.PictureLinks)
                 .FirstOrDefault(c => c.CarId == id);
         }
 
