@@ -15,11 +15,11 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
         {
             _carRepository = carRepository;
         }
-        public List<Car> GetCars()
+        public FilteredList<Car> GetCars(Filter filter = null)
         {
             if (_carRepository.ReadAllCars() != null)
             {
-                return _carRepository.ReadAllCars().ToList();
+                return _carRepository.ReadAllCars(filter);
             }
 
             return null;
@@ -67,6 +67,11 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
             }
 
             return _carRepository.UpdateCar(car);
+        }
+
+        public int Count()
+        {
+            return _carRepository.Count();
         }
     }
 }
