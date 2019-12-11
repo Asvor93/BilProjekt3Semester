@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BilProjekt3Semester.core.ApplicationServices;
 using BilProjekt3Semester.Core.DomainServices;
@@ -61,6 +62,21 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
         public int Count()
         {
             return _carShopContext.Cars.Count();
+        }
+
+        public void CheckAndDeleteOldCars()
+        {
+            var cars = _carShopContext.Cars;
+            foreach (var car in cars)
+            {
+                if (car.Sold)
+                {
+                    if (car.SoldDate.Value.AddDays(3) < DateTime.Now)
+                    {
+                        DeleteCar(car.CarId);
+                    }
+                }
+            }
         }
 
         public Car DeleteCar(int id)

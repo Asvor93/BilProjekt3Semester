@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using BilProjekt3Semester.core.ApplicationServices;
 using BilProjekt3Semester.Core.ApplicationServices;
@@ -26,6 +27,8 @@ namespace BilProjekt3Semester.RestApi
 {
     public class Startup
     {
+        private Timer timer;
+
         public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
@@ -98,14 +101,19 @@ namespace BilProjekt3Semester.RestApi
         {
             if (env.IsDevelopment())
             {
+
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
+                    
                     var context = scope.ServiceProvider.GetRequiredService<CarShopContext>();
                     var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
                    
                     // It is done here instead of in the initializer so that it does not interfere with the production environment
                        context.Database.EnsureDeleted();
                        dbInitializer.SeedDb(context);
+
+                    var serviceRepo = scope.ServiceProvider.GetRequiredService<ICarRepository>();
+                    InitDeleteCarThread(serviceRepo);
                 }
                 app.UseDeveloperExceptionPage();
             }
@@ -126,6 +134,18 @@ namespace BilProjekt3Semester.RestApi
             app.UseHttpsRedirection();
             app.UseCors("AllowSpecificOrigin");
             app.UseMvc();
+        }
+
+        public void InitDeleteCarThread(ICarRepository repo)
+        {
+            var startTimeSpan = TimeSpan.Zero;
+            var periodTimeSpan = TimeSpan.FromMinutes(0.5);
+
+            timer = new Timer((e) =>
+            {
+                repo.CheckAndDeleteOldCars();
+            }, null, startTimeSpan, periodTimeSpan);
+
         }
     }
 }
