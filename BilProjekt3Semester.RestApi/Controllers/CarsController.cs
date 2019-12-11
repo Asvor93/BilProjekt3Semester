@@ -23,11 +23,11 @@ namespace BilProjekt3Semester.RestApi.Controllers
 
         // GET api/cars
         [HttpGet]
-        public ActionResult<Car> Get()
+        public ActionResult<FilteredList<Car>> Get([FromQuery] Filter filter)
         {
             try
             {
-                return Ok(_carService.GetCars());
+                return Ok(_carService.GetCars(filter));
             }
             catch (Exception e)
             {

@@ -5,10 +5,11 @@ namespace BilProjekt3Semester.Core.ApplicationServices
 {
     public interface ICarService
     {
-        List<Car> GetCars();
+        FilteredList<Car> GetCars(Filter filter);
         Car CreateCar(Car car);
         Car DeleteCar(Car carToDelete);
         Car ReadById(int id);
         Car UpdateCar(Car car);
+        int Count();
     }
 }
