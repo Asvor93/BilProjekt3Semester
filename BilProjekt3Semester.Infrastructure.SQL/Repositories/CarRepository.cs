@@ -15,14 +15,30 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
         {
             _carShopContext = carShopContext;
         }
-        public IEnumerable<Car> ReadAllCars()
+        public FilteredList<Car> ReadAllCars(Filter filter)
         {
-            return _carShopContext.Cars
-                .Include(c => c.CarAccessories)
+            var filteredList = new FilteredList<Car>();
+
+            if (filter.CurrentPage > 0 && filter.ItemsPrPage > 0)
+            {
+                filteredList.List = _carShopContext.Cars.AsNoTracking().Include(c => c.CarAccessories)
+                    .Include(c => c.CarDetails)
+                    .Include(c => c.CarSpecs)
+                    .Include(c => c.PictureLinks).Skip((filter.CurrentPage - 1)
+                                                       * filter.ItemsPrPage).Take(filter.ItemsPrPage);
+
+                filteredList.Count = _carShopContext.Cars.Count();
+
+                return filteredList;
+            }
+            filteredList.List = _carShopContext.Cars.Include(c => c.CarAccessories)
                 .Include(c => c.CarDetails)
                 .Include(c => c.CarSpecs)
-                .Include(c => c.PictureLinks)
-                .ToList();
+                .Include(c => c.PictureLinks);
+            filteredList.Count = _carShopContext.Cars.Count();
+
+            return filteredList;
+
         }
 
         public Car CreateCar(Car car)
@@ -40,6 +56,11 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
                 .Include(c => c.CarSpecs)
                 .Include(c => c.PictureLinks)
                 .FirstOrDefault(c => c.CarId == id);
+        }
+
+        public int Count()
+        {
+            return _carShopContext.Cars.Count();
         }
 
         public Car DeleteCar(int id)

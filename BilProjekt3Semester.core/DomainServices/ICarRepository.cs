@@ -5,10 +5,11 @@ namespace BilProjekt3Semester.Core.DomainServices
 {
     public interface ICarRepository
     {
-        IEnumerable<Car> ReadAllCars();
+        FilteredList<Car> ReadAllCars(Filter filter = null);
         Car CreateCar(Car car);
         Car DeleteCar(int id);
         Car UpdateCar(Car carToUpdate);
         Car ReadById(int id);
+        int Count();
     }
 }
