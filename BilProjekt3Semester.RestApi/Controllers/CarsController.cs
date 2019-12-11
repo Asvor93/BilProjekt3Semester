@@ -27,7 +27,7 @@ namespace BilProjekt3Semester.RestApi.Controllers
         {
             try
             {
-                return Ok(_carService.GetCars(filter));
+                return Ok(_carService.GetFilteredCars(filter));
             }
             catch (Exception e)
             {

@@ -15,14 +15,15 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
         {
             _carRepository = carRepository;
         }
-        public FilteredList<Car> GetCars(Filter filter = null)
+        public FilteredList<Car> GetFilteredCars(Filter filter = null)
         {
-            if (_carRepository.ReadAllCars() != null)
-            {
-                return _carRepository.ReadAllCars(filter);
-            }
 
-            return null;
+                return _carRepository.ReadAllCars(filter);
+        }
+
+        public FilteredList<Car> GetCars()
+        {
+            return _carRepository.ReadAllCars();
         }
 
         public Car ReadById(int id)

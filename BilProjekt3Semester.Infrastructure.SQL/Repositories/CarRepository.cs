@@ -21,8 +21,7 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
 
             if (filter.CurrentPage > 0 && filter.ItemsPrPage > 0)
             {
-                filteredList.List = _carShopContext.Cars.AsNoTracking()
-                    .Include(c => c.CarAccessories)
+                filteredList.List = _carShopContext.Cars.Include(c => c.CarAccessories)
                     .Include(c => c.CarDetails)
                     .Include(c => c.CarSpecs)
                     .Include(c => c.PictureLinks).Skip((filter.CurrentPage - 1)
@@ -32,8 +31,7 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
 
                 return filteredList;
             }
-            filteredList.List = _carShopContext.Cars.AsNoTracking()
-                .Include(c => c.CarAccessories)
+            filteredList.List = _carShopContext.Cars.Include(c => c.CarAccessories)
                 .Include(c => c.CarDetails)
                 .Include(c => c.CarSpecs)
                 .Include(c => c.PictureLinks);
@@ -75,9 +73,9 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
         public Car UpdateCar(Car carToUpdate)
         {
             _carShopContext.Attach(carToUpdate).State = EntityState.Modified;
-            _carShopContext.Entry(carToUpdate.CarDetails).State = EntityState.Modified;
-            _carShopContext.Entry(carToUpdate.CarAccessories).State = EntityState.Modified;
-            _carShopContext.Entry(carToUpdate.CarSpecs).State = EntityState.Modified;
+            _carShopContext.Entry(carToUpdate).Reference(c => c.CarDetails).IsModified = true;
+            _carShopContext.Entry(carToUpdate).Reference(c => c.CarAccessories).IsModified = true;
+            _carShopContext.Entry(carToUpdate).Reference(c => c.CarSpecs).IsModified = true;
             _carShopContext.Entry(carToUpdate).Collection(c => c.PictureLinks).IsModified = true;
             _carShopContext.SaveChanges();
             return carToUpdate;

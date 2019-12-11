@@ -5,7 +5,8 @@ namespace BilProjekt3Semester.Core.ApplicationServices
 {
     public interface ICarService
     {
-        FilteredList<Car> GetCars(Filter filter);
+        FilteredList<Car> GetFilteredCars(Filter filter);
+        FilteredList<Car> GetCars();
         Car CreateCar(Car car);
         Car DeleteCar(Car carToDelete);
         Car ReadById(int id);
