@@ -21,7 +21,8 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
 
             if (filter.CurrentPage > 0 && filter.ItemsPrPage > 0)
             {
-                filteredList.List = _carShopContext.Cars.AsNoTracking().Include(c => c.CarAccessories)
+                filteredList.List = _carShopContext.Cars.AsNoTracking()
+                    .Include(c => c.CarAccessories)
                     .Include(c => c.CarDetails)
                     .Include(c => c.CarSpecs)
                     .Include(c => c.PictureLinks).Skip((filter.CurrentPage - 1)
@@ -31,7 +32,8 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
 
                 return filteredList;
             }
-            filteredList.List = _carShopContext.Cars.Include(c => c.CarAccessories)
+            filteredList.List = _carShopContext.Cars.AsNoTracking()
+                .Include(c => c.CarAccessories)
                 .Include(c => c.CarDetails)
                 .Include(c => c.CarSpecs)
                 .Include(c => c.PictureLinks);
