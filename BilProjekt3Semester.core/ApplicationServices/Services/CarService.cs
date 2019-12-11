@@ -74,5 +74,10 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
         {
             return _carRepository.Count();
         }
+
+        public void CheckAndDeleteOldCars()
+        {
+            _carRepository.CheckAndDeleteOldCars();
+        }
     }
 }

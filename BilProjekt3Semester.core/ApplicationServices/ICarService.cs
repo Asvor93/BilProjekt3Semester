@@ -12,5 +12,6 @@ namespace BilProjekt3Semester.Core.ApplicationServices
         Car ReadById(int id);
         Car UpdateCar(Car car);
         int Count();
+        void CheckAndDeleteOldCars();
     }
 }

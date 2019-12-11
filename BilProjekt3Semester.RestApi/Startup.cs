@@ -112,8 +112,7 @@ namespace BilProjekt3Semester.RestApi
                        context.Database.EnsureDeleted();
                        dbInitializer.SeedDb(context);
 
-                    var serviceRepo = scope.ServiceProvider.GetRequiredService<ICarRepository>();
-                    InitDeleteCarThread(serviceRepo);
+                    InitDeleteCarThread(app);
                 }
                 app.UseDeveloperExceptionPage();
             }
@@ -136,14 +135,20 @@ namespace BilProjekt3Semester.RestApi
             app.UseMvc();
         }
 
-        public void InitDeleteCarThread(ICarRepository repo)
+        public void InitDeleteCarThread(IApplicationBuilder app)
         {
             var startTimeSpan = TimeSpan.Zero;
             var periodTimeSpan = TimeSpan.FromMinutes(0.5);
 
             timer = new Timer((e) =>
             {
-                repo.CheckAndDeleteOldCars();
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var carService = scope.ServiceProvider.GetService<ICarService>();
+                    carService.CheckAndDeleteOldCars();
+                }
+
+                
             }, null, startTimeSpan, periodTimeSpan);
 
         }
