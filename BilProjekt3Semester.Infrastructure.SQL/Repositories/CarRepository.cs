@@ -74,7 +74,7 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
             {
                 if (car.Sold)
                 {
-                    if (car.SoldDate.Value.AddDays(3) < DateTime.Now)
+                    if (car.SoldDate.AddDays(3) < DateTime.Now)
                     {
                         DeleteCar(car.CarId);
                     }
