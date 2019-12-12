@@ -79,5 +79,10 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
         {
             _carRepository.CheckAndDeleteOldCars();
         }
+
+        public FilteredList<Car> SearchCars(string query)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

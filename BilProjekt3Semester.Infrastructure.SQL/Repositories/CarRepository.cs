@@ -79,6 +79,11 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
             }
         }
 
+        public FilteredList<Car> SearchCars(string query)
+        {
+            throw new NotImplementedException();
+        }
+
         public Car DeleteCar(int id)
         {
             var carToDelete = _carShopContext.Remove(new Car {CarId = id}).Entity;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using BilProjekt3Semester.core.ApplicationServices;
 using BilProjekt3Semester.Core.ApplicationServices;
 using BilProjekt3Semester.Core.ApplicationServices.Services;
@@ -20,7 +21,7 @@ namespace BilProjekt3Semester.Test
             //setup
             var mockCar = new Car
             {
-                CarAccessories = new CarAccessory { AbsBrakes = false },
+                CarAccessories = new CarAccessory {AbsBrakes = false},
                 CarSpecs = new CarSpec(),
                 CarDetails = new CarDetail()
             };
@@ -28,7 +29,7 @@ namespace BilProjekt3Semester.Test
             var mockCarRepo = new Mock<ICarRepository>();
             mockCarRepo.Setup(r => r.CreateCar(It.IsAny<Car>())).Returns(mockCar);
             ICarService service = new CarService(mockCarRepo.Object);
-            
+
             //Calling method
             service.CreateCar(mockCar);
 
@@ -117,7 +118,7 @@ namespace BilProjekt3Semester.Test
             //setup
             var mockCar = new Car
             {
-                CarAccessories = new CarAccessory { AbsBrakes = false },
+                CarAccessories = new CarAccessory {AbsBrakes = false},
                 CarSpecs = new CarSpec(),
                 CarDetails = new CarDetail()
             };
@@ -131,6 +132,39 @@ namespace BilProjekt3Semester.Test
 
             //Assert
             mockCarRepo.Verify(s => s.UpdateCar(It.IsAny<Car>()), Times.Once);
+        }
+
+        [Fact]
+        public void TestSearchCarsByBrandName()
+        {
+            //setup
+            var carList = new List<Car>();
+            for (int i = 0; i < 20; i++)
+            {
+                carList.Add(new Car()
+                {
+                    CarAccessories = new CarAccessory {AbsBrakes = false},
+                    CarSpecs = new CarSpec(),
+                    CarDetails = new CarDetail() {BrandName = "Audi" + i}
+                });
+            }
+
+            var query = "Audi1";
+            var expectedList = new FilteredList<Car>()
+            {
+                List = carList.Where(c => c.CarDetails.BrandName.Contains(query)),
+                Count = carList.Count
+            };
+
+            var mockCarRepo = new Mock<ICarRepository>();
+            mockCarRepo.Setup(r => r.SearchCars(query)).Returns(expectedList);
+            ICarService service = new CarService(mockCarRepo.Object);
+
+            //Calling method
+            var foundCars = service.SearchCars(query);
+
+            //Assert
+            Assert.Equal(expectedList, foundCars);
         }
     }
 }
