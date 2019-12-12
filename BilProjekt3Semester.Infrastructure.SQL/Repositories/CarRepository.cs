@@ -5,6 +5,7 @@ using BilProjekt3Semester.core.ApplicationServices;
 using BilProjekt3Semester.Core.DomainServices;
 using BilProjekt3Semester.Core.Entity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
 {
@@ -26,7 +27,8 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
                     .Include(c => c.CarDetails)
                     .Include(c => c.CarSpecs)
                     .Include(c => c.PictureLinks).Skip((filter.CurrentPage - 1)
-                                                       * filter.ItemsPrPage).Take(filter.ItemsPrPage);
+                                                       * filter.ItemsPrPage).Take(filter.ItemsPrPage)
+                    .Where(c => c.CarDetails.BrandName.Contains(filter.SearchBrandNameQuery));
 
                 filteredList.Count = _carShopContext.Cars.Count();
 
@@ -35,7 +37,8 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
             filteredList.List = _carShopContext.Cars.Include(c => c.CarAccessories)
                 .Include(c => c.CarDetails)
                 .Include(c => c.CarSpecs)
-                .Include(c => c.PictureLinks);
+                .Include(c => c.PictureLinks)
+                .Where(c => c.CarDetails.BrandName.Contains(filter.SearchBrandNameQuery)); ;
             filteredList.Count = _carShopContext.Cars.Count();
 
             return filteredList;
@@ -77,17 +80,6 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
                     }
                 }
             }
-        }
-
-        public FilteredList<Car> SearchCars(string query)
-        {
-            var carList = _carShopContext.Cars.Where(c => c.CarDetails.BrandName.StartsWith(query));
-            var filteredCarList = new FilteredList<Car>()
-            {
-                List = carList,
-                Count = carList.Count()
-            };
-            return filteredCarList;
         }
 
         public Car DeleteCar(int id)

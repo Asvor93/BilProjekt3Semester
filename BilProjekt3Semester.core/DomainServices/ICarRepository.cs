@@ -12,6 +12,5 @@ namespace BilProjekt3Semester.Core.DomainServices
         Car ReadById(int id);
         int Count();
         void CheckAndDeleteOldCars();
-        FilteredList<Car> SearchCars(string query);
     }
 }

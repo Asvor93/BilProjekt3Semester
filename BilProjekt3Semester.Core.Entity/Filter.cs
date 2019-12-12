@@ -4,5 +4,6 @@
     {
         public int CurrentPage { get; set; }
         public int ItemsPrPage { get; set; }
+        public string SearchBrandNameQuery { get; set; }
     }
 }

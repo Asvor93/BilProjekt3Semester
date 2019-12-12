@@ -13,6 +13,5 @@ namespace BilProjekt3Semester.Core.ApplicationServices
         Car UpdateCar(Car car);
         int Count();
         void CheckAndDeleteOldCars();
-        FilteredList<Car> SearchCars(string query);
     }
 }

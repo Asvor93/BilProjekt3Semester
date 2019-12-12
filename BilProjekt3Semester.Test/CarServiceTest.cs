@@ -154,20 +154,23 @@ namespace BilProjekt3Semester.Test
                     CarDetails = new CarDetail() { BrandName = "BMW" + i }
                 });
             }
-
-            var query = "Audi19";
+            var filter = new Filter()
+            {
+                SearchBrandNameQuery = "Audi19"
+            };
+            
             var expectedList = new FilteredList<Car>()
             {
-                List = carList.Where(c => c.CarDetails.BrandName.Contains(query)),
+                List = carList.Where(c => c.CarDetails.BrandName.Contains(filter.SearchBrandNameQuery)),
                 Count = carList.Count
             };
 
             var mockCarRepo = new Mock<ICarRepository>();
-            mockCarRepo.Setup(r => r.SearchCars(query)).Returns(expectedList);
+            mockCarRepo.Setup(r => r.ReadAllCars(filter)).Returns(expectedList);
             ICarService service = new CarService(mockCarRepo.Object);
 
             //Calling method
-            var foundCars = service.SearchCars(query);
+            var foundCars = service.GetFilteredCars(filter);
 
             //Assert
             Assert.Equal(expectedList, foundCars);
