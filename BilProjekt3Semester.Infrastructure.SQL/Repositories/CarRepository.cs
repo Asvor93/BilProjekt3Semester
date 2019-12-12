@@ -81,7 +81,13 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
 
         public FilteredList<Car> SearchCars(string query)
         {
-            throw new NotImplementedException();
+            var carList = _carShopContext.Cars.Where(c => c.CarDetails.BrandName.StartsWith(query));
+            var filteredCarList = new FilteredList<Car>()
+            {
+                List = carList,
+                Count = carList.Count()
+            };
+            return filteredCarList;
         }
 
         public Car DeleteCar(int id)

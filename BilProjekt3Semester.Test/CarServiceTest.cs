@@ -147,9 +147,15 @@ namespace BilProjekt3Semester.Test
                     CarSpecs = new CarSpec(),
                     CarDetails = new CarDetail() {BrandName = "Audi" + i}
                 });
+                carList.Add(new Car()
+                {
+                    CarAccessories = new CarAccessory { AbsBrakes = false },
+                    CarSpecs = new CarSpec(),
+                    CarDetails = new CarDetail() { BrandName = "BMW" + i }
+                });
             }
 
-            var query = "Audi1";
+            var query = "Audi19";
             var expectedList = new FilteredList<Car>()
             {
                 List = carList.Where(c => c.CarDetails.BrandName.Contains(query)),

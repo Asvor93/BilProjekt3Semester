@@ -82,7 +82,7 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
 
         public FilteredList<Car> SearchCars(string query)
         {
-            throw new System.NotImplementedException();
+            return _carRepository.SearchCars(query);
         }
     }
 }
