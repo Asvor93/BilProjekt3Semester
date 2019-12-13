@@ -25,7 +25,7 @@ namespace BilProjekt3Semester.RestApi.Controllers
 
 
         [HttpPost]
-        public IActionResult Login([FromBody]LoginInputModel model)
+        public IActionResult Login([FromBody] LoginInputModel model)
         {
             var user = repository.GetAll().FirstOrDefault(u => u.Username == model.Username);
 
@@ -44,6 +44,5 @@ namespace BilProjekt3Semester.RestApi.Controllers
                 token = authenticationHelper.GenerateToken(user)
             });
         }
-
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 
 namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
 {
-    public class CarRepository: ICarRepository
+    public class CarRepository : ICarRepository
     {
         private readonly CarShopContext _carShopContext;
 
@@ -17,9 +17,17 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
         {
             _carShopContext = carShopContext;
         }
+
         public FilteredList<Car> ReadAllCars(Filter filter)
         {
             var filteredList = new FilteredList<Car>();
+            if (filter != null)
+            {
+                if (string.IsNullOrEmpty(filter.SearchBrandNameQuery))
+                {
+                    filter.SearchBrandNameQuery = "";
+                }
+            }
 
             if (filter.CurrentPage > 0 && filter.ItemsPrPage > 0)
             {
@@ -34,14 +42,15 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
 
                 return filteredList;
             }
+
             filteredList.List = _carShopContext.Cars.Include(c => c.CarAccessories)
                 .Include(c => c.CarDetails)
                 .Include(c => c.CarSpecs)
-                .Include(c => c.PictureLinks); 
+                .Include(c => c.PictureLinks)
+                .Where(c => c.CarDetails.BrandName.Contains(filter.SearchBrandNameQuery));
             filteredList.Count = _carShopContext.Cars.Count();
 
             return filteredList;
-
         }
 
         public Car CreateCar(Car car)
@@ -66,19 +75,10 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
             return _carShopContext.Cars.Count();
         }
 
-        public void CheckAndDeleteOldCars()
+        public void CheckAndDeleteOldCars(Car car)
         {
-            //var cars = _carShopContext.Cars;
-            //foreach (var car in cars)
-            //{
-            //    if (car.Sold)
-            //    {
-            //        if (car.SoldDate.AddDays(3) < DateTime.Now)
-            //        {
-            //            DeleteCar(car.CarId);
-            //        }
-            //    }
-            //}
+            _carShopContext.Cars.Remove(car);
+            _carShopContext.SaveChanges();
         }
 
         public Car DeleteCar(int id)

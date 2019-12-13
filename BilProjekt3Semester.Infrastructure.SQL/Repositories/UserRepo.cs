@@ -9,7 +9,6 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
 {
     public class UserRepo : IUserRepo
     {
-
         private readonly CarShopContext db;
 
         public UserRepo(CarShopContext context)

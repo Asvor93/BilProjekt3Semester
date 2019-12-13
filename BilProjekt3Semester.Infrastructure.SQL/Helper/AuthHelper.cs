@@ -38,6 +38,7 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Helper
                     if (computedHash[i] != storedHash[i]) return false;
                 }
             }
+
             return true;
         }
 
@@ -58,8 +59,8 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Helper
                 new JwtPayload(null, // issuer - not needed (ValidateIssuer = false)
                     null, // audience - not needed (ValidateAudience = false)
                     claims.ToArray(),
-                    DateTime.Now,               // notBefore
-                    DateTime.Now.AddDays(10)));  // expires
+                    DateTime.Now, // notBefore
+                    DateTime.Now.AddDays(10))); // expires
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

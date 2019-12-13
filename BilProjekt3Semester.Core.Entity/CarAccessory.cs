@@ -14,7 +14,9 @@ namespace BilProjekt3Semester.Core.Entity
         public bool ElectricWindows { get; set; }
         public bool CentralLock { get; set; }
         public bool RemoteCentralLock { get; set; }
+
         public bool CruiseControl { get; set; }
+
         //KlimaAnlæg
         public bool AirCon { get; set; }
         public bool RadioWithCd { get; set; }
@@ -23,6 +25,5 @@ namespace BilProjekt3Semester.Core.Entity
         public bool SplitBackSeat { get; set; }
         public Car Car { get; set; }
         public int CarId { get; set; }
-
     }
 }

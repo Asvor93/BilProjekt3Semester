@@ -11,6 +11,6 @@ namespace BilProjekt3Semester.Core.DomainServices
         Car UpdateCar(Car carToUpdate);
         Car ReadById(int id);
         int Count();
-        void CheckAndDeleteOldCars();
+        void CheckAndDeleteOldCars(Car car);
     }
 }

@@ -15,7 +15,6 @@ namespace BilProjekt3Semester.Test
 {
     public class CarServiceTest
     {
-
         [Fact]
         public void TestCreateShouldThrowExceptionIfCarHasNoCarDetails()
         {
@@ -128,16 +127,17 @@ namespace BilProjekt3Semester.Test
                 });
                 carList.Add(new Car()
                 {
-                    CarAccessories = new CarAccessory { AbsBrakes = false },
+                    CarAccessories = new CarAccessory {AbsBrakes = false},
                     CarSpecs = new CarSpec(),
-                    CarDetails = new CarDetail() { BrandName = "BMW" + i }
+                    CarDetails = new CarDetail() {BrandName = "BMW" + i}
                 });
             }
+
             var filter = new Filter()
             {
                 SearchBrandNameQuery = "Audi19"
             };
-            
+
             var expectedList = new FilteredList<Car>()
             {
                 List = carList.Where(c => c.CarDetails.BrandName.Contains(filter.SearchBrandNameQuery)),
@@ -161,8 +161,8 @@ namespace BilProjekt3Semester.Test
             //setup
             var mockCar = new Car
             {
-                CarAccessories = new CarAccessory { AbsBrakes = false },
-                CarSpecs = new CarSpec{Weight = 0},
+                CarAccessories = new CarAccessory {AbsBrakes = false},
+                CarSpecs = new CarSpec {Weight = 0},
                 CarDetails = new CarDetail()
             };
 
@@ -173,7 +173,7 @@ namespace BilProjekt3Semester.Test
             //Calling method
             //Assert
             Assert.Throws<InvalidDataException>(() => service.CreateCar(mockCar));
-             mockCarRepo.Verify(s => s.CreateCar(It.IsAny<Car>()), Times.Never);
+            mockCarRepo.Verify(s => s.CreateCar(It.IsAny<Car>()), Times.Never);
         }
 
         [Fact]
@@ -182,8 +182,8 @@ namespace BilProjekt3Semester.Test
             //setup
             var mockCar = new Car
             {
-                CarAccessories = new CarAccessory { AbsBrakes = false },
-                CarSpecs = new CarSpec { MaxWeight = 0 },
+                CarAccessories = new CarAccessory {AbsBrakes = false},
+                CarSpecs = new CarSpec {MaxWeight = 0},
                 CarDetails = new CarDetail()
             };
 
@@ -203,8 +203,8 @@ namespace BilProjekt3Semester.Test
             //setup
             var mockCar = new Car
             {
-                CarAccessories = new CarAccessory { AbsBrakes = false },
-                CarSpecs = new CarSpec { Width = 0 },
+                CarAccessories = new CarAccessory {AbsBrakes = false},
+                CarSpecs = new CarSpec {Width = 0},
                 CarDetails = new CarDetail()
             };
 
@@ -224,8 +224,8 @@ namespace BilProjekt3Semester.Test
             //setup
             var mockCar = new Car
             {
-                CarAccessories = new CarAccessory { AbsBrakes = false },
-                CarSpecs = new CarSpec { Length = 0 },
+                CarAccessories = new CarAccessory {AbsBrakes = false},
+                CarSpecs = new CarSpec {Length = 0},
                 CarDetails = new CarDetail()
             };
 
@@ -245,8 +245,8 @@ namespace BilProjekt3Semester.Test
             //setup
             var mockCar = new Car
             {
-                CarAccessories = new CarAccessory { AbsBrakes = false },
-                CarSpecs = new CarSpec { Cylinder = 0 },
+                CarAccessories = new CarAccessory {AbsBrakes = false},
+                CarSpecs = new CarSpec {Cylinder = 0},
                 CarDetails = new CarDetail()
             };
 
@@ -266,8 +266,8 @@ namespace BilProjekt3Semester.Test
             //setup
             var mockCar = new Car
             {
-                CarAccessories = new CarAccessory { AbsBrakes = false },
-                CarSpecs = new CarSpec { Valves = 0 },
+                CarAccessories = new CarAccessory {AbsBrakes = false},
+                CarSpecs = new CarSpec {Valves = 0},
                 CarDetails = new CarDetail()
             };
 
@@ -286,8 +286,8 @@ namespace BilProjekt3Semester.Test
             //setup
             var mockCar = new Car
             {
-                CarAccessories = new CarAccessory { AbsBrakes = false },
-                CarSpecs = new CarSpec { Tank = 0 },
+                CarAccessories = new CarAccessory {AbsBrakes = false},
+                CarSpecs = new CarSpec {Tank = 0},
                 CarDetails = new CarDetail()
             };
 
@@ -306,8 +306,8 @@ namespace BilProjekt3Semester.Test
             //setup
             var mockCar = new Car
             {
-                CarAccessories = new CarAccessory { AbsBrakes = false },
-                CarSpecs = new CarSpec { Tonnage = 0 },
+                CarAccessories = new CarAccessory {AbsBrakes = false},
+                CarSpecs = new CarSpec {Tonnage = 0},
                 CarDetails = new CarDetail()
             };
 
@@ -327,8 +327,8 @@ namespace BilProjekt3Semester.Test
             //setup
             var mockCar = new Car
             {
-                CarAccessories = new CarAccessory { AbsBrakes = false },
-                CarSpecs = new CarSpec { NewPrice = 0 },
+                CarAccessories = new CarAccessory {AbsBrakes = false},
+                CarSpecs = new CarSpec {NewPrice = 0},
                 CarDetails = new CarDetail()
             };
 
@@ -348,8 +348,8 @@ namespace BilProjekt3Semester.Test
             //setup
             var mockCar = new Car
             {
-                CarAccessories = new CarAccessory { AbsBrakes = false },
-                CarSpecs = new CarSpec { CostPrSixMonths = 0 },
+                CarAccessories = new CarAccessory {AbsBrakes = false},
+                CarSpecs = new CarSpec {CostPrSixMonths = 0},
                 CarDetails = new CarDetail()
             };
 
@@ -362,6 +362,5 @@ namespace BilProjekt3Semester.Test
             Assert.Throws<InvalidDataException>(() => service.CreateCar(mockCar));
             mockCarRepo.Verify(s => s.CreateCar(It.IsAny<Car>()), Times.Never);
         }
-
     }
 }

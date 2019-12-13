@@ -9,7 +9,6 @@ namespace BilProjekt3Semester.Infrastructure.SQL
     {
         public CarShopContext(DbContextOptions opt) : base(opt)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -22,7 +21,7 @@ namespace BilProjekt3Semester.Infrastructure.SQL
             modelBuilder.Entity<Car>()
                 .HasOne(c => c.CarAccessories)
                 .WithOne(ca => ca.Car)
-                .HasForeignKey<CarAccessory>(ca => ca.CarId); 
+                .HasForeignKey<CarAccessory>(ca => ca.CarId);
 
             modelBuilder.Entity<Car>()
                 .HasOne(c => c.CarSpecs)
@@ -47,6 +46,4 @@ namespace BilProjekt3Semester.Infrastructure.SQL
         public DbSet<CarSpec> CarSpecs { get; set; }
         public DbSet<CarPictureLink> CarPictureLinks { get; set; }
     }
-
-    
 }

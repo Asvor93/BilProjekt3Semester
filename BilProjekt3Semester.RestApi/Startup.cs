@@ -37,7 +37,7 @@ namespace BilProjekt3Semester.RestApi
 
         public IConfiguration Configuration { get; }
         public IHostingEnvironment Environment { get; set; }
-        
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -72,11 +72,11 @@ namespace BilProjekt3Semester.RestApi
                     ClockSkew = TimeSpan.FromMinutes(1) //5 minute tolerance for the expiration date
                 };
             });
-          
+
 
             if (Environment.IsDevelopment())
             {
-                services.AddDbContext<CarShopContext>( opt => opt.UseSqlite("Data source=CarShop.db"));
+                services.AddDbContext<CarShopContext>(opt => opt.UseSqlite("Data source=CarShop.db"));
             }
             else
             {
@@ -91,9 +91,7 @@ namespace BilProjekt3Semester.RestApi
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
         }
-
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -101,19 +99,18 @@ namespace BilProjekt3Semester.RestApi
         {
             if (env.IsDevelopment())
             {
-
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
-                    
                     var context = scope.ServiceProvider.GetRequiredService<CarShopContext>();
                     var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
-                   
+
                     // It is done here instead of in the initializer so that it does not interfere with the production environment
-                       context.Database.EnsureDeleted();
-                       dbInitializer.SeedDb(context);
+                    context.Database.EnsureDeleted();
+                    dbInitializer.SeedDb(context);
 
                     InitDeleteCarThread(app);
                 }
+
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -125,6 +122,7 @@ namespace BilProjekt3Semester.RestApi
                     //dbInitializer.SeedDb(context);  //only run once
                     //context.Database.EnsureCreated();
                 }
+
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -138,7 +136,7 @@ namespace BilProjekt3Semester.RestApi
         public void InitDeleteCarThread(IApplicationBuilder app)
         {
             var startTimeSpan = TimeSpan.Zero;
-            var periodTimeSpan = TimeSpan.FromMinutes(0.5);
+            var periodTimeSpan = TimeSpan.FromDays(1);
 
             timer = new Timer((e) =>
             {
@@ -147,10 +145,7 @@ namespace BilProjekt3Semester.RestApi
                     var carService = scope.ServiceProvider.GetService<ICarService>();
                     carService.CheckAndDeleteOldCars();
                 }
-
-                
             }, null, startTimeSpan, periodTimeSpan);
-
         }
     }
 }
