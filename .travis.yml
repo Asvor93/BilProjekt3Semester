@@ -6,7 +6,8 @@ solution: BilProjekt3Semester.sln
 script:
  - dotnet restore
  - dotnet build
-
+ - dotnet test BilProjekt3Semester/BilProjekt3Semester.Test.csproj
+ 
 # safelist
 branches:
  only:
