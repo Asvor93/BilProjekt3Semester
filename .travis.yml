@@ -3,20 +3,10 @@ mono: none
 dotnet: 2.2
 solution: BilProjekt3Semester.sln
 
-addons:
- snaps:
-  - name: dotnet-sdk
-    confinement: classic
-    channel: 2.2/stable
-
-before_script:
- - sudo snap alias dotnet-sdk.dotnet dotnet
- 
 script:
  - dotnet restore
  - dotnet build
  - dotnet test BilProjekt3Semester/BilProjekt3Semester.Test.csproj
- 
 # safelist
 branches:
  only:
