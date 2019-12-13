@@ -34,65 +34,10 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
 
         public Car CreateCar(Car carToCreate)
         {
-            if (carToCreate.CarDetails == null)
-            {
-                throw new InvalidDataException("CarDetails can't be null when trying to create a car");
-            }
-
-            if (carToCreate.CarAccessories == null)
-            {
-                throw new InvalidDataException("CarAccessories can't be null when trying to create a car");
-            }
-
-            if (carToCreate.CarSpecs == null)
-            {
-                throw new InvalidDataException("CarSpecs can't be null when trying to create a car");
-            }
-
-            if (carToCreate.CarSpecs.Tank < 0)
-            {
-                throw new InvalidDataException("Tank has to be higher than or equal to zero");
-            }
-
-            if (carToCreate.CarSpecs.NewPrice < 0)
-            {
-                throw new InvalidDataException("New price has to be higher than or equal to zero");
-            }
-
-            if (carToCreate.CarSpecs.Width < 0)
-            {
-                throw new InvalidDataException("Width has to be higher than or equal to zero");
-            }
-
-            if (carToCreate.CarSpecs.Valves < 0)
-            {
-                throw new InvalidDataException("Valves has to be higher than or equal to zero");
-            }
-
-            if (carToCreate.CarSpecs.MaxWeight < 0)
-            {
-                throw new InvalidDataException("Max weight has to be higher than or equal to zero");
-            }
-
-            if (carToCreate.CarSpecs.Length < 0)
-            {
-                throw new InvalidDataException("Length has to be higher than or equal to zero");
-            }
-
-            if (carToCreate.CarSpecs.Cylinder < 0)
-            {
-                throw new InvalidDataException("Cylinder has to be higher than or equal to zero");
-            }
-
-            if (carToCreate.CarSpecs.CostPrSixMonths < 0)
-            {
-                throw new InvalidDataException("Cost per six months has to be higher than or equal to zero");
-            }
-
-            if (carToCreate.CarSpecs.Weight < 0)
-            {
-                throw new InvalidDataException("Weight has to be higher than or equal to zero");
-            }
+            ValidateId(carToCreate.CarId);
+            ValidateSpecValues(carToCreate.CarSpecs);
+            ValidateDetailValues(carToCreate.CarDetails);
+            ValidateAccessoryValues(carToCreate.CarAccessories);
 
             return _carRepository.CreateCar(carToCreate);
         }
@@ -134,6 +79,162 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
                         _carRepository.CheckAndDeleteOldCars(car);
                     }
                 }
+            }
+        }
+
+        public void ValidateAccessoryValues(CarAccessory carAccessory)
+        {
+            if (carAccessory == null)
+            {
+                throw new InvalidDataException("CarAccessories can't be null when trying to create a car");
+            }
+
+            if (carAccessory.NrOfAirbags < 0)
+            {
+                throw new InvalidDataException("Number of airbags has to be higher than or equal to zero");
+            }
+        }
+
+        public void ValidateDetailValues(CarDetail carDetail)
+        {
+            if (carDetail == null)
+            {
+                throw new InvalidDataException("CarDetails can't be null when trying to create a car");
+            }
+
+            if (carDetail.Color.Any(char.IsDigit))
+            {
+                throw new InvalidDataException("Color can not contain numbers");
+            }
+
+            if (carDetail.BrandName.Any(char.IsDigit))
+            {
+                throw new InvalidDataException("Brand name can not contain numbers");
+            }
+
+            if (carDetail == null)
+            {
+                throw new InvalidDataException("CarDetails can't be null when trying to create a car");
+            }
+
+            if (carDetail.Kilometer < 0)
+            {
+                throw new InvalidDataException("Kilometer has to be higher than or equal to zero");
+            }
+
+            if (carDetail.Doors < 0)
+            {
+                throw new InvalidDataException("Doors has to be higher than or equal to zero");
+            }
+
+            if (carDetail.HorsePower < 0)
+            {
+                throw new InvalidDataException("HorsePower has to be higher than or equal to zero");
+            }
+
+            if (carDetail.KmPrLiter < 0)
+            {
+                throw new InvalidDataException("KmPrLiter has to be higher than or equal to zero");
+            }
+
+            if (carDetail.MotorSize < 0)
+            {
+                throw new InvalidDataException("MotorSize has to be higher than or equal to zero");
+            }
+
+            if (carDetail.Torque < 0)
+            {
+                throw new InvalidDataException("Torque has to be higher than or equal to zero");
+            }
+
+            if (carDetail.Year < 0)
+            {
+                throw new InvalidDataException("Year has to be higher than or equal to zero");
+            }
+
+            if (carDetail.TopSpeed < 0)
+            {
+                throw new InvalidDataException("Top speed has to be higher than or equal to zero");
+            }
+        }
+
+        public void ValidateStringDoNotContainNumbers(string input, string name)
+        {
+            if (input.Any(char.IsDigit))
+            {
+                throw new InvalidDataException(name + "can not contain numbers");
+            }
+        }
+
+        public void ValidateId(int id)
+        {
+            if (id < 0)
+            {
+                throw new InvalidDataException("Id has to be higher than zero");
+            }
+        }
+
+
+        public void ValidateSpecValues(CarSpec carSpecs)
+        {
+            if (carSpecs == null)
+            {
+                throw new InvalidDataException("CarSpecs can't be null when trying to create a car");
+            }
+
+            if (carSpecs.Tonnage < 0)
+            {
+                throw new InvalidDataException("Tonnage has to be higher than or equal to zero");
+            }
+
+            if (carSpecs.Tank < 0)
+            {
+                throw new InvalidDataException("Tank has to be higher than or equal to zero");
+            }
+
+            if (carSpecs.NewPrice < 0)
+            {
+                throw new InvalidDataException("New price has to be higher than or equal to zero");
+            }
+
+            if (carSpecs.Width < 0)
+            {
+                throw new InvalidDataException("Width has to be higher than or equal to zero");
+            }
+
+            if (carSpecs.Valves < 0)
+            {
+                throw new InvalidDataException("Valves has to be higher than or equal to zero");
+            }
+
+            if (carSpecs.MaxWeight < 0)
+            {
+                throw new InvalidDataException("Max weight has to be higher than or equal to zero");
+            }
+
+            if (carSpecs.Length < 0)
+            {
+                throw new InvalidDataException("Length has to be higher than or equal to zero");
+            }
+
+            if (carSpecs.Cylinder < 0)
+            {
+                throw new InvalidDataException("Cylinder has to be higher than or equal to zero");
+            }
+
+            if (carSpecs.CostPrSixMonths < 0)
+            {
+                throw new InvalidDataException("Cost per six months has to be higher than or equal to zero");
+            }
+
+            if (carSpecs.Weight < 0)
+            {
+                throw new InvalidDataException("Weight has to be higher than or equal to zero");
+            }
+
+            if (carSpecs.MaxTrailerWeight < 0)
+            {
+                throw new InvalidDataException("Nax trailer weight has to be higher than or equal to zero");
             }
         }
     }

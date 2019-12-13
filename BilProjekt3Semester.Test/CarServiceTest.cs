@@ -7,6 +7,7 @@ using BilProjekt3Semester.Core.ApplicationServices;
 using BilProjekt3Semester.Core.ApplicationServices.Services;
 using BilProjekt3Semester.Core.DomainServices;
 using BilProjekt3Semester.Core.Entity;
+using BilProjekt3Semester.Infrastructure.SQL.Helper;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Moq;
 using Xunit;
@@ -15,6 +16,8 @@ namespace BilProjekt3Semester.Test
 {
     public class CarServiceTest
     {
+       
+
         [Fact]
         public void TestCreateShouldThrowExceptionIfCarHasNoCarDetails()
         {
@@ -26,6 +29,7 @@ namespace BilProjekt3Semester.Test
             };
 
             var mockCarRepo = new Mock<ICarRepository>();
+            IValidationHelper valHelper = new ValidationHelper();
             ICarService service = new CarService(mockCarRepo.Object);
 
             //Calling method and assert
@@ -156,118 +160,13 @@ namespace BilProjekt3Semester.Test
         }
 
         [Fact]
-        public void TestCreateCarCanNotCreateIfWeightIsZeroOrLess()
+        public void TestCreateCarCanNotCreateIfWeightIsLessThanZero()
         {
             //setup
             var mockCar = new Car
             {
                 CarAccessories = new CarAccessory {AbsBrakes = false},
-                CarSpecs = new CarSpec {Weight = 0},
-                CarDetails = new CarDetail()
-            };
-
-            var mockCarRepo = new Mock<ICarRepository>();
-            mockCarRepo.Setup(r => r.CreateCar(It.IsAny<Car>())).Returns(mockCar);
-            ICarService service = new CarService(mockCarRepo.Object);
-
-            //Calling method
-            //Assert
-            Assert.Throws<InvalidDataException>(() => service.CreateCar(mockCar));
-            mockCarRepo.Verify(s => s.CreateCar(It.IsAny<Car>()), Times.Never);
-        }
-
-        [Fact]
-        public void TestCreateCarCanNotCreateIfMaxWeightIsZeroOrLess()
-        {
-            //setup
-            var mockCar = new Car
-            {
-                CarAccessories = new CarAccessory {AbsBrakes = false},
-                CarSpecs = new CarSpec {MaxWeight = 0},
-                CarDetails = new CarDetail()
-            };
-
-            var mockCarRepo = new Mock<ICarRepository>();
-            mockCarRepo.Setup(r => r.CreateCar(It.IsAny<Car>())).Returns(mockCar);
-            ICarService service = new CarService(mockCarRepo.Object);
-
-            //Calling method
-            //Assert
-            Assert.Throws<InvalidDataException>(() => service.CreateCar(mockCar));
-            mockCarRepo.Verify(s => s.CreateCar(It.IsAny<Car>()), Times.Never);
-        }
-
-        [Fact]
-        public void TestCreateCarCanNotCreateIfWidthIsZeroOrLess()
-        {
-            //setup
-            var mockCar = new Car
-            {
-                CarAccessories = new CarAccessory {AbsBrakes = false},
-                CarSpecs = new CarSpec {Width = 0},
-                CarDetails = new CarDetail()
-            };
-
-            var mockCarRepo = new Mock<ICarRepository>();
-            mockCarRepo.Setup(r => r.CreateCar(It.IsAny<Car>())).Returns(mockCar);
-            ICarService service = new CarService(mockCarRepo.Object);
-
-            //Calling method
-            //Assert
-            Assert.Throws<InvalidDataException>(() => service.CreateCar(mockCar));
-            mockCarRepo.Verify(s => s.CreateCar(It.IsAny<Car>()), Times.Never);
-        }
-
-        [Fact]
-        public void TestCreateCarCanNotCreateIfLengthIsZeroOrLess()
-        {
-            //setup
-            var mockCar = new Car
-            {
-                CarAccessories = new CarAccessory {AbsBrakes = false},
-                CarSpecs = new CarSpec {Length = 0},
-                CarDetails = new CarDetail()
-            };
-
-            var mockCarRepo = new Mock<ICarRepository>();
-            mockCarRepo.Setup(r => r.CreateCar(It.IsAny<Car>())).Returns(mockCar);
-            ICarService service = new CarService(mockCarRepo.Object);
-
-            //Calling method
-            //Assert
-            Assert.Throws<InvalidDataException>(() => service.CreateCar(mockCar));
-            mockCarRepo.Verify(s => s.CreateCar(It.IsAny<Car>()), Times.Never);
-        }
-
-        [Fact]
-        public void TestCreateCarCanNotCreateIfCylinderIsZeroOrLess()
-        {
-            //setup
-            var mockCar = new Car
-            {
-                CarAccessories = new CarAccessory {AbsBrakes = false},
-                CarSpecs = new CarSpec {Cylinder = 0},
-                CarDetails = new CarDetail()
-            };
-
-            var mockCarRepo = new Mock<ICarRepository>();
-            mockCarRepo.Setup(r => r.CreateCar(It.IsAny<Car>())).Returns(mockCar);
-            ICarService service = new CarService(mockCarRepo.Object);
-
-            //Calling method
-            //Assert
-            Assert.Throws<InvalidDataException>(() => service.CreateCar(mockCar));
-            mockCarRepo.Verify(s => s.CreateCar(It.IsAny<Car>()), Times.Never);
-        }
-
-        [Fact]
-        public void TestCreateCarCanNotCreateIfValveIsZeroOrLess()
-        {
-            //setup
-            var mockCar = new Car
-            {
-                CarAccessories = new CarAccessory {AbsBrakes = false},
-                CarSpecs = new CarSpec {Valves = 0},
+                CarSpecs = new CarSpec {Weight = -1},
                 CarDetails = new CarDetail()
             };
 
@@ -281,13 +180,33 @@ namespace BilProjekt3Semester.Test
         }
 
         [Fact]
-        public void TestCreateCarCanNotCreateIfTankIsZeroOrLess()
+        public void TestCreateCarCanNotCreateIfMaxWeightIsLessThanZero()
         {
             //setup
             var mockCar = new Car
             {
                 CarAccessories = new CarAccessory {AbsBrakes = false},
-                CarSpecs = new CarSpec {Tank = 0},
+                CarSpecs = new CarSpec {MaxWeight = -1},
+                CarDetails = new CarDetail()    
+            };
+
+            var mockCarRepo = new Mock<ICarRepository>();
+            ICarService service = new CarService(mockCarRepo.Object);
+
+            //Calling method
+            //Assert
+            Assert.Throws<InvalidDataException>(() => service.CreateCar(mockCar));
+            mockCarRepo.Verify(s => s.CreateCar(It.IsAny<Car>()), Times.Never);
+        }
+
+        [Fact]
+        public void TestCreateCarCanNotCreateIfWidthIsZeroIsLessThanZero()
+        {
+            //setup
+            var mockCar = new Car
+            {
+                CarAccessories = new CarAccessory {AbsBrakes = false},
+                CarSpecs = new CarSpec {Width = -1},
                 CarDetails = new CarDetail()
             };
 
@@ -301,18 +220,17 @@ namespace BilProjekt3Semester.Test
         }
 
         [Fact]
-        public void TestCreateCarCanNotCreateIfTonnageIsZeroOrLess()
+        public void TestCreateCarCanNotCreateIfLengthIsLessThanZero()
         {
             //setup
             var mockCar = new Car
             {
                 CarAccessories = new CarAccessory {AbsBrakes = false},
-                CarSpecs = new CarSpec {Tonnage = 0},
+                CarSpecs = new CarSpec {Length = -1},
                 CarDetails = new CarDetail()
             };
 
             var mockCarRepo = new Mock<ICarRepository>();
-            mockCarRepo.Setup(r => r.CreateCar(It.IsAny<Car>())).Returns(mockCar);
             ICarService service = new CarService(mockCarRepo.Object);
 
             //Calling method
@@ -322,18 +240,17 @@ namespace BilProjekt3Semester.Test
         }
 
         [Fact]
-        public void TestCreateCarCanNotCreateIfNewPriceIsZeroOrLess()
+        public void TestCreateCarCanNotCreateIfCylinderIsLessThanZero()
         {
             //setup
             var mockCar = new Car
             {
                 CarAccessories = new CarAccessory {AbsBrakes = false},
-                CarSpecs = new CarSpec {NewPrice = 0},
+                CarSpecs = new CarSpec {Cylinder = -1},
                 CarDetails = new CarDetail()
             };
 
             var mockCarRepo = new Mock<ICarRepository>();
-            mockCarRepo.Setup(r => r.CreateCar(It.IsAny<Car>())).Returns(mockCar);
             ICarService service = new CarService(mockCarRepo.Object);
 
             //Calling method
@@ -343,18 +260,97 @@ namespace BilProjekt3Semester.Test
         }
 
         [Fact]
-        public void TestCreateCarCanNotCreateIfCostPrSixMonthsIsZeroOrLess()
+        public void TestCreateCarCanNotCreateIfValveIsLessThanZero()
         {
             //setup
             var mockCar = new Car
             {
                 CarAccessories = new CarAccessory {AbsBrakes = false},
-                CarSpecs = new CarSpec {CostPrSixMonths = 0},
+                CarSpecs = new CarSpec {Valves = -1},
                 CarDetails = new CarDetail()
             };
 
             var mockCarRepo = new Mock<ICarRepository>();
-            mockCarRepo.Setup(r => r.CreateCar(It.IsAny<Car>())).Returns(mockCar);
+            ICarService service = new CarService(mockCarRepo.Object);
+
+            //Calling method
+            //Assert
+            Assert.Throws<InvalidDataException>(() => service.CreateCar(mockCar));
+            mockCarRepo.Verify(s => s.CreateCar(It.IsAny<Car>()), Times.Never);
+        }
+
+        [Fact]
+        public void TestCreateCarCanNotCreateIfTankIsLessThanZero()
+        {
+            //setup
+            var mockCar = new Car
+            {
+                CarAccessories = new CarAccessory {AbsBrakes = false},
+                CarSpecs = new CarSpec {Tank = -1},
+                CarDetails = new CarDetail()
+            };
+
+            var mockCarRepo = new Mock<ICarRepository>();
+            ICarService service = new CarService(mockCarRepo.Object);
+
+            //Calling method
+            //Assert
+            Assert.Throws<InvalidDataException>(() => service.CreateCar(mockCar));
+            mockCarRepo.Verify(s => s.CreateCar(It.IsAny<Car>()), Times.Never);
+        }
+
+        [Fact]
+        public void TestCreateCarCanNotCreateIfTonnageIsLessThanZero()
+        {
+            //setup
+            var mockCar = new Car
+            {
+                CarAccessories = new CarAccessory {AbsBrakes = false},
+                CarSpecs = new CarSpec {Tonnage = -1},
+                CarDetails = new CarDetail()
+            };
+
+            var mockCarRepo = new Mock<ICarRepository>();
+            ICarService service = new CarService(mockCarRepo.Object);
+
+            //Calling method
+            //Assert
+            Assert.Throws<InvalidDataException>(() => service.CreateCar(mockCar));
+            mockCarRepo.Verify(s => s.CreateCar(It.IsAny<Car>()), Times.Never);
+        }
+
+        [Fact]
+        public void TestCreateCarCanNotCreateIfNewPriceIsLessThanZero()
+        {
+            //setup
+            var mockCar = new Car
+            {
+                CarAccessories = new CarAccessory {AbsBrakes = false},
+                CarSpecs = new CarSpec {NewPrice = -1},
+                CarDetails = new CarDetail()
+            };
+
+            var mockCarRepo = new Mock<ICarRepository>();
+            ICarService service = new CarService(mockCarRepo.Object);
+
+            //Calling method
+            //Assert
+            Assert.Throws<InvalidDataException>(() => service.CreateCar(mockCar));
+            mockCarRepo.Verify(s => s.CreateCar(It.IsAny<Car>()), Times.Never);
+        }
+
+        [Fact]
+        public void TestCreateCarCanNotCreateIfCostPrSixMonthsIsLessThanZero()
+        {
+            //setup
+            var mockCar = new Car
+            {
+                CarAccessories = new CarAccessory {AbsBrakes = false},
+                CarSpecs = new CarSpec {CostPrSixMonths = -1},
+                CarDetails = new CarDetail()
+            };
+
+            var mockCarRepo = new Mock<ICarRepository>();
             ICarService service = new CarService(mockCarRepo.Object);
 
             //Calling method
