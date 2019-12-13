@@ -36,8 +36,9 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
         {
             ValidateId(carToCreate.CarId);
             ValidateSpecValues(carToCreate.CarSpecs);
-            ValidateDetailValues(carToCreate.CarDetails);
             ValidateAccessoryValues(carToCreate.CarAccessories);
+            ValidateDetailValues(carToCreate.CarDetails);
+          
 
             return _carRepository.CreateCar(carToCreate);
         }

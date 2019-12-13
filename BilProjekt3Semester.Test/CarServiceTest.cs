@@ -29,7 +29,6 @@ namespace BilProjekt3Semester.Test
             };
 
             var mockCarRepo = new Mock<ICarRepository>();
-            IValidationHelper valHelper = new ValidationHelper();
             ICarService service = new CarService(mockCarRepo.Object);
 
             //Calling method and assert
