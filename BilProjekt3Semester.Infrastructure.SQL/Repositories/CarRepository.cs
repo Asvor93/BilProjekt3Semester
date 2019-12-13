@@ -37,8 +37,7 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
             filteredList.List = _carShopContext.Cars.Include(c => c.CarAccessories)
                 .Include(c => c.CarDetails)
                 .Include(c => c.CarSpecs)
-                .Include(c => c.PictureLinks)
-                .Where(c => c.CarDetails.BrandName.Contains(filter.SearchBrandNameQuery)); ;
+                .Include(c => c.PictureLinks); 
             filteredList.Count = _carShopContext.Cars.Count();
 
             return filteredList;
@@ -69,17 +68,17 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
 
         public void CheckAndDeleteOldCars()
         {
-            var cars = _carShopContext.Cars;
-            foreach (var car in cars)
-            {
-                if (car.Sold)
-                {
-                    if (car.SoldDate.AddDays(3) < DateTime.Now)
-                    {
-                        DeleteCar(car.CarId);
-                    }
-                }
-            }
+            //var cars = _carShopContext.Cars;
+            //foreach (var car in cars)
+            //{
+            //    if (car.Sold)
+            //    {
+            //        if (car.SoldDate.AddDays(3) < DateTime.Now)
+            //        {
+            //            DeleteCar(car.CarId);
+            //        }
+            //    }
+            //}
         }
 
         public Car DeleteCar(int id)

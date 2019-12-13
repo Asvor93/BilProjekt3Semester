@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using BilProjekt3Semester.core.ApplicationServices;
@@ -47,42 +48,42 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
             {
                 throw new InvalidDataException("CarSpecs can't be null when trying to create a car");
             }
-            if (carToCreate.CarSpecs.Tank <= 0)
-            {
-                throw new InvalidDataException("Tank has to be higher than zero");
-            }
-            if (carToCreate.CarSpecs.NewPrice <= 0)
-            {
-                throw new InvalidDataException("New price has to be higher than zero");
-            }
-            if (carToCreate.CarSpecs.Width <= 0)
-            {
-                throw new InvalidDataException("Width has to be higher than zero");
-            }
-            if (carToCreate.CarSpecs.Valves <= 0)
-            {
-                throw new InvalidDataException("Valves has to be higher than zero");
-            }
-            if (carToCreate.CarSpecs.MaxWeight <= 0)
-            {
-                throw new InvalidDataException("Max weight has to be higher than zero");
-            }
-            if (carToCreate.CarSpecs.Length <= 0)
-            {
-                throw new InvalidDataException("Length has to be higher than zero");
-            }
-            if (carToCreate.CarSpecs.Cylinder <= 0)
-            {
-                throw new InvalidDataException("Cylinder has to be higher than zero");
-            }
-            if (carToCreate.CarSpecs.CostPrSixMonths <= 0)
-            {
-                throw new InvalidDataException("Cost per six months has to be higher than zero");
-            }
-            if (carToCreate.CarSpecs.Weight <= 0)
-            {
-                throw new InvalidDataException("Weight has to be higher than zero");
-            }
+            //if (carToCreate.CarSpecs.Tank < 0)
+            //{
+            //    throw new InvalidDataException("Tank has to be higher than or equal to zero");
+            //}
+            //if (carToCreate.CarSpecs.NewPrice < 0)
+            //{
+            //    throw new InvalidDataException("New price has to be higher than or equal to zero");
+            //}
+            //if (carToCreate.CarSpecs.Width < 0)
+            //{
+            //    throw new InvalidDataException("Width has to be higher than or equal to zero");
+            //}
+            //if (carToCreate.CarSpecs.Valves < 0)
+            //{
+            //    throw new InvalidDataException("Valves has to be higher than or equal to zero");
+            //}
+            //if (carToCreate.CarSpecs.MaxWeight < 0)
+            //{
+            //    throw new InvalidDataException("Max weight has to be higher than or equal to zero");
+            //}
+            //if (carToCreate.CarSpecs.Length < 0)
+            //{
+            //    throw new InvalidDataException("Length has to be higher than or equal to zero");
+            //}
+            //if (carToCreate.CarSpecs.Cylinder < 0)
+            //{
+            //    throw new InvalidDataException("Cylinder has to be higher than or equal to zero");
+            //}
+            //if (carToCreate.CarSpecs.CostPrSixMonths < 0)
+            //{
+            //    throw new InvalidDataException("Cost per six months has to be higher than or equal to zero");
+            //}
+            //if (carToCreate.CarSpecs.Weight < 0)
+            //{
+            //    throw new InvalidDataException("Weight has to be higher than or equal to zero");
+            //}
 
             return _carRepository.CreateCar(carToCreate);
         }
@@ -113,7 +114,19 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
 
         public void CheckAndDeleteOldCars()
         {
-            _carRepository.CheckAndDeleteOldCars();
+            
+            //var cars = GetFilteredCars(new Filter());
+            //foreach (var car in cars.List)
+            //{
+            //    if (car.Sold)
+            //    {
+            //        if (car.SoldDate.AddDays(3) < DateTime.Now)
+            //        {
+            //            _carRepository.DeleteCar(car.CarId);
+            //        }
+            //    }
+            //}
+     
         }
     }
 }
