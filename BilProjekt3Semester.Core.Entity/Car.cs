@@ -5,6 +5,7 @@ namespace BilProjekt3Semester.Core.Entity
 {
     public class Car
     {
+        public bool CarOnFrontPage { get; set; }
         public int CarId { get; set; }
         public double Price { get; set; }
         public bool Sold { get; set; }
