@@ -133,6 +133,8 @@ namespace BilProjekt3Semester.RestApi
             app.UseMvc();
         }
 
+        // Uses a thread to continuously run the CheckAndDeleteOldCars method
+        // based on the startTimeSpan and periodTimeSpan variables
         public void InitDeleteCarThread(IApplicationBuilder app)
         {
             var startTimeSpan = TimeSpan.Zero;

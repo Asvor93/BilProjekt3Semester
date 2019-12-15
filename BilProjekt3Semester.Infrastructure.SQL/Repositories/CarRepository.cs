@@ -29,7 +29,7 @@ namespace BilProjekt3Semester.Infrastructure.SQL.Repositories
                 }
             }
 
-            if (filter.CurrentPage > 0 && filter.ItemsPrPage > 0)
+            if (filter != null && (filter.CurrentPage > 0 && filter.ItemsPrPage > 0))
             {
                 filteredList.List = _carShopContext.Cars.Include(c => c.CarAccessories)
                     .Include(c => c.CarDetails)

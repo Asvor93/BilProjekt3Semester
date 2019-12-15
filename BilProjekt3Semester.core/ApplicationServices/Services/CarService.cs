@@ -22,11 +22,6 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
             return _carRepository.ReadAllCars(filter);
         }
 
-        public FilteredList<Car> GetCars()
-        {
-            return _carRepository.ReadAllCars();
-        }
-
         public Car ReadById(int id)
         {
             return _carRepository.ReadById(id);
