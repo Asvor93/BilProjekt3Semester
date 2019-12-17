@@ -155,14 +155,6 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
             }
         }
 
-        public void ValidateStringDoNotContainNumbers(string input, string name)
-        {
-            if (input.Any(char.IsDigit))
-            {
-                throw new InvalidDataException(name + "can not contain numbers");
-            }
-        }
-
         public void ValidateId(int id)
         {
             if (id < 0)
