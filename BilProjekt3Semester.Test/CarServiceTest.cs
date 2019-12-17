@@ -11,6 +11,8 @@ using BilProjekt3Semester.Infrastructure.SQL.Helper;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Moq;
 using Xunit;
+using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace BilProjekt3Semester.Test
 {
@@ -154,6 +156,90 @@ namespace BilProjekt3Semester.Test
             //Calling method
             var foundCars = service.GetFilteredCars(filter);
 
+            //Assert
+            Assert.Equal(expectedList, foundCars);
+        }
+
+        [Fact]
+        public void TestSearchCarsByBrandNameReturnsEmptyListIfNoMatch()
+        {
+            //setup
+            var carList = new List<Car>();
+            for (int i = 0; i < 20; i++)
+            {
+                carList.Add(new Car()
+                {
+                    CarAccessories = new CarAccessory { AbsBrakes = false },
+                    CarSpecs = new CarSpec(),
+                    CarDetails = new CarDetail() { BrandName = "Audi" + i }
+                });
+                carList.Add(new Car()
+                {
+                    CarAccessories = new CarAccessory { AbsBrakes = false },
+                    CarSpecs = new CarSpec(),
+                    CarDetails = new CarDetail() { BrandName = "BMW" + i }
+                });
+            }
+
+            var filter = new Filter()
+            {
+                SearchBrandNameQuery = "Skoda"
+            };
+
+            var expectedList = new FilteredList<Car>()
+            {
+                List = carList.Where(c => c.CarDetails.BrandName.Contains(filter.SearchBrandNameQuery)),
+                Count = carList.Count
+            };
+
+            var mockCarRepo = new Mock<ICarRepository>();
+            mockCarRepo.Setup(r => r.ReadAllCars(filter)).Returns(expectedList);
+            ICarService service = new CarService(mockCarRepo.Object);
+
+            //Calling method
+            var foundCars = service.GetFilteredCars(filter);
+
+            //Assert
+            Assert.Equal(expectedList, foundCars);
+        }
+
+        [Fact]
+        public void TestSearchCarsByBrandNameReturnsAllCarsIfFilterIsNull()
+        {
+            //setup
+            var carList = new List<Car>();
+            for (int i = 0; i < 20; i++)
+            {
+                carList.Add(new Car()
+                {
+                    CarAccessories = new CarAccessory { AbsBrakes = false },
+                    CarSpecs = new CarSpec(),
+                    CarDetails = new CarDetail() { BrandName = "Audi" + i }
+                });
+                carList.Add(new Car()
+                {
+                    CarAccessories = new CarAccessory { AbsBrakes = false },
+                    CarSpecs = new CarSpec(),
+                    CarDetails = new CarDetail() { BrandName = "BMW" + i }
+                });
+            }
+
+            var filter = new Filter();
+        
+
+            var expectedList = new FilteredList<Car>()
+            {
+                List = new List<Car>(),
+                Count = carList.Count
+            };
+
+            var mockCarRepo = new Mock<ICarRepository>();
+            mockCarRepo.Setup(r => r.ReadAllCars(filter)).Returns(expectedList);
+            ICarService service = new CarService(mockCarRepo.Object);
+
+            //Calling method
+            var foundCars = service.GetFilteredCars(filter);
+         
             //Assert
             Assert.Equal(expectedList, foundCars);
         }

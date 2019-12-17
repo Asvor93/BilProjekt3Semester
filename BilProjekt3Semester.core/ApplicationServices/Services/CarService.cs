@@ -54,7 +54,9 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
             {
                 throw new InvalidDataException("The car does not exist!");
             }
-
+            ValidateSpecValues(car.CarSpecs);
+            ValidateAccessoryValues(car.CarAccessories);
+            ValidateDetailValues(car.CarDetails);
             return _carRepository.UpdateCar(car);
         }
 
@@ -98,15 +100,14 @@ namespace BilProjekt3Semester.Core.ApplicationServices.Services
                 throw new InvalidDataException("CarDetails can't be null when trying to create a car");
             }
 
-            if (carDetail.Color.Any(char.IsDigit))
+            if (carDetail.Color != null)
             {
-                throw new InvalidDataException("Color can not contain numbers");
+                if (carDetail.Color.Any(char.IsDigit))
+                {
+                    throw new InvalidDataException("Color can not contain numbers");
+                }
             }
-
-            if (carDetail.BrandName.Any(char.IsDigit))
-            {
-                throw new InvalidDataException("Brand name can not contain numbers");
-            }
+            
 
             if (carDetail == null)
             {
