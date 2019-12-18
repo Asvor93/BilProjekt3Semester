@@ -119,8 +119,10 @@ namespace BilProjekt3Semester.RestApi
                 {
                     var context = scope.ServiceProvider.GetRequiredService<CarShopContext>();
                     var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
-                    //dbInitializer.SeedDb(context);  //only run once
-                    //context.Database.EnsureCreated();
+                    //dbInitializer.SeedDb(context);  //only run once 
+                    //context.Database.EnsureCreated();   //needs to be run once for entity core to create the database tables
+
+                    InitDeleteCarThread(app); // this is used for checking and deleting old cars.
                 }
 
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
