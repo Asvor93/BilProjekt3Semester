@@ -54,7 +54,7 @@ namespace BilProjekt3Semester.RestApi
 
             services.AddCors(options => options.AddPolicy("AllowSpecificOrigin",
                 builder => builder
-                    .WithOrigins("http://localhost:4200")
+                    .WithOrigins("https://bilprojekt-5fa44.firebaseapp.com/")
                     .AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
             // Add JWT based authentication
